@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import {Input, InputNumber, Select} from 'antd';
-import * as axios from 'axios'
 import SelectLoadingComponent from "../SelectLoadingComponent/SelectLoadingComponent";
 
 const { Option } = Select;
@@ -8,23 +7,6 @@ const { Option } = Select;
 
 
 export const ComponentCreatorFromSchema = (name, description, onChangeCallbackFunction) => {
-
-    const [fetchingComponents,setFetchingComponents] = useState(false);
-
-    const getData = (url) => {
-        setFetchingComponents(true)
-        debugger
-        axios.get(url).then(
-            response=>{
-                setFetchingComponents(false)
-                return response.data.objects;
-            }
-        );
-
-
-
-    }
-
 
     const debugAddress = 'https://av.admtyumen.ru/';
     switch (description.type) {
@@ -98,7 +80,7 @@ export const ComponentCreatorFromSchema = (name, description, onChangeCallbackFu
             debugger
             const link = debugAddress ? debugAddress + description.url : description.url;
             console.log(link)
-            return <SelectLoadingComponent url={link}/>
+            return <SelectLoadingComponent url={link} onChangeCallbackFunction={onChangeCallbackFunction} optionsid={description.pk_field} optionsValue={description.display_field}/>
         }
         default:
             return null

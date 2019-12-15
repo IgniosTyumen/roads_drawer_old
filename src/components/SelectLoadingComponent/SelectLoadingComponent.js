@@ -7,15 +7,20 @@ const { Option } = Select;
 class SelectLoadingComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
-            dataset:{}
-        }
     };
 
-    async onDropdownVisibleChange(){
-        const response = await  axiosInstance.get(this.props.url)
+    state = {
+        dataset:[],
+        fetching:false
+    }
+
+    onDropdownVisibleChange(){
+        this.setState({dataset:[],fetching:true});
+        debugger
+        axiosInstance.get(this.props.url).then(
+            response=>this.setState({dataset:response.data.objects,fetching:false})
+        )
         debugger;
-        this.setState('dataset',response.data.objects);
     }
 
 
@@ -23,17 +28,14 @@ class SelectLoadingComponent extends React.Component {
 
         const {url} = this.props;
 
-        const onDropdownVisibleChange = () => {
-            axiosInstance.get(url).then(response => setDataset(response));
-        }
-
         let Options = [];
-        for (let it = 0; it < dataset.length; it++) {
-            Options.push(<Option value={it}>{it}</Option>)
+        for (let it = 0; it < this.state.dataset.length; it++) {
+            console.log(this.state.dataset[it])
+            Options.push(<Option value={this.state.dataset[it][this.props.optionsid]}>{this.state.dataset[it][this.props.optionsValue]}</Option>)
         }
 
         return (
-            <Select onDropdownVisibleChange={onDropdownVisibleChange}>
+            <Select onDropdownVisibleChange={()=>this.onDropdownVisibleChange()} onChange={(value) => this.props.onChangeCallbackFunction(value)}>
                 {Options}
             </Select>
         )

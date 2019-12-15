@@ -1,6 +1,5 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useState} from "react";
 import {Marker, Polyline} from "react-leaflet";
-import {calculateLengthBetweenPoints} from "../../utils/calculateLengthBetweenPoints";
 
 const WaypointTemplateLayer = props => {
 
@@ -80,7 +79,6 @@ const WaypointTemplateLayer = props => {
     }
 
     const handleDeleteMarker = (index) => {
-        debugger
         if (templateWaypoint.geometry.points.length===1) {
             appActions.enableAddMarkerMode();
         }

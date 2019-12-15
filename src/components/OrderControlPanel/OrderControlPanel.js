@@ -1,14 +1,10 @@
 import React, {Fragment} from "react";
 import 'antd/dist/antd.css';
-import {Input} from 'antd';
-import {Table, Badge, Menu, Dropdown, Icon} from 'antd';
-import Button from "../ui/Button";
+import {Input, Modal, Select, Table} from 'antd';
 import {calculateLengthBetweenPoints} from "../../utils/calculateLengthBetweenPoints";
 import {calculatePermission} from "../../utils/calculatePermission";
-import {Select} from 'antd';
 import IconButton from "@material-ui/core/IconButton";
 import SaveIcon from "@material-ui/icons/Save";
-import { Modal } from 'antd';
 
 const { confirm } = Modal;
 
@@ -100,7 +96,6 @@ const TableForWaypoint = (props) => {
 
 
     const onRowSelect = (event, record) => {
-        debugger
         if (record.geometry.points.length) {
             mapActions.setCenterAndZoom(record.geometry.points[0], 10)
         }
@@ -169,7 +164,6 @@ const OrderControlPanel = (props) => {
         value="Автомобильная дорога местного значения">Автомобильная дорога местного значения</Option>)
 
     const handleSelectImportanceChange = (value) => {
-        debugger
         waypointActions.changeImportanceOfTemplate(value);
     }
 
@@ -189,7 +183,6 @@ const OrderControlPanel = (props) => {
     let OptionsDistricts = userAuth.districtRights.map(element => <Option value={element.id}>{element.name}</Option>)
 
     const handleSelectDistrictChange = (value) => {
-        debugger
         const districtName = userAuth.districtRights.find(el => el.id === value).name;
         waypointActions.changeDistrictOfTemplate(value, districtName);
     }

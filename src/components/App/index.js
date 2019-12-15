@@ -1,12 +1,10 @@
 import React, {Fragment, useEffect} from 'react';
-import {connect} from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import Map from "~/components/Map";
 import MainControlPanelContainer from "../MainControlPanel/MainControlPanelContainer";
 import * as AppActions from "~/actions/AppActions";
 import {bindActionCreators, compose} from "redux";
 import PreloaderContainer from "../Preloader/PreloaderContainer";
-import {Provider} from 'react-redux';
-import {HashRouter, Route, withRouter} from "react-router-dom";
 import {store} from "~/store/configureStore";
 import DrawPanelContainer from "../DrawPanel/DrawPanelContainer";
 
@@ -14,10 +12,6 @@ const App = ({appActions, isInitialized,...props}) => {
     useEffect(() => appActions.initApp(props), []);
     return (
         <Fragment>
-            <Route path='/:documentId'
-                   render={() => {
-                       return (
-                           <Fragment>
                                {<PreloaderContainer/>}
                                {
                                    isInitialized
@@ -28,11 +22,6 @@ const App = ({appActions, isInitialized,...props}) => {
                                    && <DrawPanelContainer/>
                                }
                                <Map style={{overflow: 'hidden'}}/>
-                           </Fragment>
-                       )
-                   }
-                   }
-            />
         </Fragment>
     );
 }
@@ -49,17 +38,14 @@ const mapDispatchToProps = dispatch => {
 };
 
 let AppContainer = compose(
-    withRouter,
     connect(mapStateToProps, mapDispatchToProps))(App)
 
 
 const AppEntryPoint = () => {
     return (
-        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </HashRouter>
     )
 }
 

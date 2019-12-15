@@ -1,0 +1,43 @@
+.input {
+  display: none;
+}
+
+.label {
+  position: relative;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+}
+
+.label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 0px 1px transparent;
+  transition: all 0.3s ease;
+}
+
+.label::after {
+  transform: scaleX(-1) rotate(135deg); 
+  animation: check 0s 1;
+  transform-origin: left top;
+  opacity: 1; 
+}
+
+.input:checked + .label::after {
+  border-right: 2px solid #35505f;
+  border-top: 2px solid #35505f;
+  content: '';
+  display: block;
+  height: 10px;
+  width: 5px;
+  left: 4px;
+  position: absolute;
+  top: 9px;
+}

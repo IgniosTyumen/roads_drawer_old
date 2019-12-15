@@ -1,0 +1,19 @@
+.label {
+    right: 14px;
+    position: absolute;
+    top: 6px;
+    font-size: 9px !important;
+    line-height: .9 !important;
+    font: normal normal bold normal 9px / 8.1px "Helvetica Neue", Helvetica, "Source Sans Pro", Arial, sans-serif;
+    padding: 2px 3px;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    background-color: #d9534f;
+}
+
+/* .color-danger {
+    background-color: #d9534f;
+} */

@@ -1,0 +1,14 @@
+.container {
+  height: 40px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #f0f3f9;
+  border-radius: 3px;
+}
+
+.label {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  display: inline-block;
+}

@@ -171,6 +171,14 @@ export const documentsApi = {
     }
 }
 
+export const schemaApi = {
+    getSchema(){
+        return axiosInstance.get(
+            '/directory/roaddirectory/schema'
+        )
+    }
+}
+
 export const testRequests = {
     testPostSequence(){
         return axiosInstance.post('http://192.168.88.137:5000/api/iopw/statement_route',

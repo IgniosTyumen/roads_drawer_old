@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import React from "react";
 
 const Preloader = (props) => {
     const {initial, dispatch} = props;
@@ -61,16 +60,6 @@ const Preloader = (props) => {
     return (
         <div className={initial.isInitialized ? 'closedPreloader animatePreloadOut' : 'preloader'}>
             {svgLogo}
-            <div className={classForBridgesLoader}>
-                <p>Файлов мостов к загрузке: {initial.bridgesDownloaded} / {initial.bridgesToDownload}</p>
-                <LinearProgress variant="determinate"
-                                value={bridgesPercentage}/>
-            </div>
-            <div className={classForDangersLoader}>
-                <p>Файлов опасных участков к загрузке: {initial.dangersDownloaded} / {initial.dangersToDownload}</p>
-                <LinearProgress variant="determinate" value={dangersPercentage}/>
-            </div>
-
             <p className={'preloaderTitle'}>Работа начнется как только все файлы будут загружены</p>
         </div>
     )

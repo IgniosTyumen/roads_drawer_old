@@ -225,7 +225,7 @@
 
 .mainGroupWindow.opened {
     position: relative;
-    height: 77vh;
+    height: 87vh;;
     z-index: 1400;
     background-color: white;
     display: flex;
@@ -234,7 +234,7 @@
     border-bottom-right-radius: 15px;
     box-shadow: 0 1px 3px 0 rgba(38, 38, 38, 0.5);
     overflow-y: auto;
-    max-height: 77vh;
+    max-height: 87vh;;
     overflow-x: hidden;
 }
 
@@ -499,4 +499,38 @@
 
 .ant-tooltip {
     z-index: 2000;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-content {
+    height: 100%;
+    margin-top: -16px;
+    z-index: 2000;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+    z-index: 2000;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar {
+    border-color: #fff;
+    z-index: 2000;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+    z-index: 2000;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    border-color: #fff;
+    background: #fff;
+    z-index: 2000;
+}
+
+.tabSector{
+    display: flex;
+    justify-content: space-around;
 }

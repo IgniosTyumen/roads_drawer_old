@@ -5,9 +5,10 @@ import getPointsArrayFromLinestring from "../../utils/getPointsArrayFromLinestri
 import {bindActionCreators} from "redux";
 import * as mapActions from "~/actions/MapActions";
 import * as selectObjectsActions from "~/actions/SelectObjectsActions";
+import * as newRoadActions from "../../actions/NewRoadActions";
 
 
-const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapActions, selectObjectsActions}) => {
+const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapActions, selectObjectsActions,newRoadActions}) => {
 
 
 
@@ -17,11 +18,20 @@ const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapAction
     }
 
 
+    const handleCreateNewRoadButtonClicked = () => {
+        newRoadActions.openCreateDialog();
+    }
+
+    const containerCallbacks = {
+        handleCreateNewRoadButtonClicked
+    }
+
     return (
         <RoadControlPanel
             roads={roads}
             handleSelectDetailedObject={handleSelectDetailedObject}
             moveMapToObject={moveMapToObject}
+            containerCallbacks={containerCallbacks}
         />
     )
 };
@@ -29,13 +39,15 @@ const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapAction
 const mapStateToProps = state => {
     return {
         roads:state.roads,
+
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         mapActions: bindActionCreators(mapActions,dispatch),
-        selectObjectsActions: bindActionCreators(selectObjectsActions,dispatch)
+        selectObjectsActions: bindActionCreators(selectObjectsActions,dispatch),
+        newRoadActions: bindActionCreators(newRoadActions,dispatch)
     }
 };
 

@@ -1,0 +1,19 @@
+.container {
+  padding: 15px 0 5px;
+  overflow: auto;
+  white-space: nowrap;
+  width: calc(100vw - 20px);
+}
+
+.container button {
+  margin: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #002d58;
+}
+
+.container button i {
+  margin-left: 4px;
+}

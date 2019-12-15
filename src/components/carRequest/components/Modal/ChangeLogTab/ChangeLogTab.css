@@ -1,0 +1,36 @@
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.table tbody {
+  height: 100%;
+}
+
+.table tr {
+  border: 1px solid #ccc;
+}
+
+.table td {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  word-break: break-word;
+}
+
+.mobileTitle {
+  color: #8a8a8a;
+}
+
+.noData {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 30px;
+  border: none;
+}

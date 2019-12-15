@@ -1,0 +1,15 @@
+.wrapper ul {
+  margin-bottom: 20px;
+}
+
+.wrapper li {
+  display: flex;
+}
+
+.wrapper li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.label {
+  margin-left: 6px;
+}

@@ -1,0 +1,16 @@
+.noData {
+  height: 400px;
+}
+
+.noData td {
+  text-align: center;
+  font-size: 30px;
+}
+
+/* @media (max-width: 850px) { */
+  .noData td {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+/* } */

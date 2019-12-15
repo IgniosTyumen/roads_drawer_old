@@ -1,0 +1,30 @@
+.button {
+  position: relative;
+}
+
+.title {
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.wrapper ul {
+  margin-bottom: 20px;
+}
+
+.wrapper li {
+  display: flex;
+}
+
+.wrapper li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.label {
+  margin-left: 6px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

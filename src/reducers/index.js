@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import map from "~/reducers/map";
 import roads from "~/reducers/roads";
 import bridges from "~/reducers/bridges";
@@ -12,6 +12,8 @@ import selectedObject from "~/reducers/selectedObject";
 import activeOrder from "~/reducers/activeOrder";
 import waypointTemplate from "~/reducers/waypointTemplate";
 import userAuth from "~/reducers/userAuth";
+import newRoadTemplate from "~/reducers/newRoadTemplate";
+import schema from "~/reducers/schema";
 
 
 export default combineReducers({
@@ -27,5 +29,7 @@ export default combineReducers({
   selectedObject,
   activeOrder,
   waypointTemplate,
-  userAuth
+  userAuth,
+  newRoadTemplate,
+  schema
 })

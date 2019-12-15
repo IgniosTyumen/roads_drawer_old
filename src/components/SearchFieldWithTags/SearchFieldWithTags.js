@@ -1,12 +1,7 @@
 import React, {useState} from "react";
-
-import { Icon, InlineIcon } from '@iconify/react';
-import slackHash from '@iconify/icons-fa-brands/slack-hash';
-import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from '@material-ui/icons/Search';
-import Divider from "@material-ui/core/Divider";
 
 const SearchFieldWithTags = ({tagsAddAction, upSearchValue}) => {
     const [inputValue, setInputValue] = useState();
@@ -25,17 +20,8 @@ const SearchFieldWithTags = ({tagsAddAction, upSearchValue}) => {
         upSearchValue(inputValue);
     };
 
-    const handleAddTag = () => {
-        tagsAddAction(inputValue);
-        setInputValue('');
-    };
-
     return (
         <div className={"searchField"}>
-            <IconButton className={"searchFieldTagIcon"} aria-label="menu" onClick={handleAddTag}>
-                <Icon icon={slackHash} />
-            </IconButton>
-            <Divider className={"searchFieldDivider"} orientation="vertical" />
             <InputBase
                 className={"searchFieldInput"}
                 placeholder="Поиск"

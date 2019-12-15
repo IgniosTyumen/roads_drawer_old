@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+}
+
+.header > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.header button.deleteButton {
+  margin-right: auto;
+}

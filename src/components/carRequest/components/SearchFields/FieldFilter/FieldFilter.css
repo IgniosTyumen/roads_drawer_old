@@ -1,0 +1,27 @@
+.container {
+  margin-bottom: 35px;
+}
+
+.filterRow {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.filterRow input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.filterRow *:first-child {
+  flex: 1;
+}
+
+.buttonRow {
+  padding: 10px 0;
+  border-top: 1px solid #e1e6ef;
+}
+
+.buttonRow button:first-child {
+  margin-right: 10px;
+}

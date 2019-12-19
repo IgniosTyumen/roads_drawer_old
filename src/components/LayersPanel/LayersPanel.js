@@ -9,12 +9,9 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SignsVisionFilterContainer from "../SignsVisionFilter/SignsVisionFilterContainer";
 import RoadVisionSettingsContainer from "../RoadsVisionSettings/RoadVisionSettingsContainer";
-import Paper from "@material-ui/core/Paper";
 import SaveIcon from '@material-ui/icons/Save';
-import Button from "../ui/Button";
 import IconButton from "@material-ui/core/IconButton";
 import DangerRoadVisionSettingsContainer from "../DangerRoadsVisionSettings/DangerRoadVisionSettingsContainer";
-import RouteVisionSettingsContainer from "../RouteVisionSettings/RouteVisionSettingsContainer";
 import DrawVisionSettingsContainer from "../DrawVisionSettings/DrawVisionSettingsContainer";
 import SignsVisualSettingsContainer from "../SignsVisualSettings/SignsVisualSettingsContainer";
 
@@ -147,7 +144,7 @@ const LayersPanel = (props) => {
             <ExpansionPanel expanded={expandedPanelsList.dangers}>
                 <ExpansionPanelSummary>
                     <div className={"panelSummaryDecorator"}>
-                        <p className={"panelSummaryDecoratorText"}>Слой аварийно-опасных участков</p>
+                        <p className={"panelSummaryDecoratorText"}>Слой объектов контроля</p>
                         <div className={"panelSummaryDecoratorActions"}>
                             <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}
                                       value={mapInvisibleList.includes('dangers') }
@@ -174,35 +171,35 @@ const LayersPanel = (props) => {
                 </ExpansionPanelDetails>
             </ExpansionPanel>
 
-                <ExpansionPanel expanded={expandedPanelsList.routes}>
-                    <ExpansionPanelSummary>
-                        <div className={"panelSummaryDecorator"}>
-                            <p className={"panelSummaryDecoratorText"}>Слой маршрутов</p>
-                            <div className={"panelSummaryDecoratorActions"}>
-                                <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}
-                                          value={mapInvisibleList.includes('routes') }
-                                          color={"primary"}
-                                          onClick={(event) => {
-                                              event.stopPropagation();
-                                              handleVisibleChange('routes', event)
-                                          }}
-                                />
-                                <Checkbox icon={<ExpandMoreIcon/>} checkedIcon={<ExpandLessIcon/>}
-                                          value={expandedPanelsList.routes}
-                                          color={"primary"}
-                                          onClick={
-                                              (event)=>{
-                                                  event.stopPropagation();
-                                                  handleExpandLayouts('routes')
-                                              }
-                                          }/>
-                            </div>
-                        </div>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                        <RouteVisionSettingsContainer/>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
+                {/*<ExpansionPanel expanded={expandedPanelsList.routes}>*/}
+                {/*    <ExpansionPanelSummary>*/}
+                {/*        <div className={"panelSummaryDecorator"}>*/}
+                {/*            <p className={"panelSummaryDecoratorText"}>Слой участков</p>*/}
+                {/*            <div className={"panelSummaryDecoratorActions"}>*/}
+                {/*                <Checkbox icon={<VisibilityIcon/>} checkedIcon={<VisibilityOffIcon/>}*/}
+                {/*                          value={mapInvisibleList.includes('routes') }*/}
+                {/*                          color={"primary"}*/}
+                {/*                          onClick={(event) => {*/}
+                {/*                              event.stopPropagation();*/}
+                {/*                              handleVisibleChange('routes', event)*/}
+                {/*                          }}*/}
+                {/*                />*/}
+                {/*                <Checkbox icon={<ExpandMoreIcon/>} checkedIcon={<ExpandLessIcon/>}*/}
+                {/*                          value={expandedPanelsList.routes}*/}
+                {/*                          color={"primary"}*/}
+                {/*                          onClick={*/}
+                {/*                              (event)=>{*/}
+                {/*                                  event.stopPropagation();*/}
+                {/*                                  handleExpandLayouts('routes')*/}
+                {/*                              }*/}
+                {/*                          }/>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </ExpansionPanelSummary>*/}
+                {/*    <ExpansionPanelDetails>*/}
+                {/*        <RouteVisionSettingsContainer/>*/}
+                {/*    </ExpansionPanelDetails>*/}
+                {/*</ExpansionPanel>*/}
 
             <ExpansionPanel expanded={expandedPanelsList.draw}>
                 <ExpansionPanelSummary>

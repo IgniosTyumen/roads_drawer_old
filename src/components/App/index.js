@@ -5,6 +5,7 @@ import MainControlPanelContainer from "../MainControlPanel/MainControlPanelConta
 import * as AppActions from "~/actions/AppActions";
 import {bindActionCreators, compose} from "redux";
 import PreloaderContainer from "../Preloader/PreloaderContainer";
+import {HashRouter, Route, withRouter} from "react-router-dom";
 import {store} from "~/store/configureStore";
 import DrawPanelContainer from "../DrawPanel/DrawPanelContainer";
 
@@ -12,6 +13,10 @@ const App = ({appActions, isInitialized,...props}) => {
     useEffect(() => appActions.initApp(props), []);
     return (
         <Fragment>
+            <Route path='/:documentId'
+                   render={() => {
+                       return (
+                           <Fragment>
                                {<PreloaderContainer/>}
                                {
                                    isInitialized
@@ -22,6 +27,30 @@ const App = ({appActions, isInitialized,...props}) => {
                                    && <DrawPanelContainer/>
                                }
                                <Map style={{overflow: 'hidden'}}/>
+                           </Fragment>
+                       )
+                   }
+                   }
+            />
+            <Route path='/' exact
+                   render={() => {
+                       return (
+                           <Fragment>
+                               {<PreloaderContainer/>}
+                               {
+                                   isInitialized
+                                   && <MainControlPanelContainer/>
+                               }
+                               {
+                                   isInitialized
+                                   && <DrawPanelContainer/>
+                               }
+                               <Map style={{overflow: 'hidden'}}/>
+                           </Fragment>
+                       )
+                   }
+                   }
+            />
         </Fragment>
     );
 }
@@ -38,14 +67,17 @@ const mapDispatchToProps = dispatch => {
 };
 
 let AppContainer = compose(
+    withRouter,
     connect(mapStateToProps, mapDispatchToProps))(App)
 
 
 const AppEntryPoint = () => {
     return (
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
+        </HashRouter>
     )
 }
 

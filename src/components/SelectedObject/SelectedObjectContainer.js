@@ -1,16 +1,19 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {connect} from "react-redux";
 import SelectedObject from "./SelectedObject";
 
-const SelectedObjectContainer = ({road, bridge, userPreferences,dangerRoad}) => {
+const SelectedObjectContainer = ({road, bridge, userPreferences,dangerRoad, segment}) => {
 
     return (
-        <SelectedObject
+        <Fragment>
+        {((road && road.line_path) || bridge || (dangerRoad && dangerRoad.path) || segment) &&  <SelectedObject
             road={road}
             bridge={bridge}
             dangerRoad={dangerRoad}
+            segment={segment}
             userPreferences={userPreferences}
-            />
+            />}
+        </Fragment>
     )
 }
 
@@ -19,6 +22,7 @@ const mapStateToProps = state => {
         road: state.selectedObject.selectedRoad,
         bridge: state.selectedObject.selectedBridge,
         dangerRoad: state.selectedObject.selectedDangerRoad,
+        segment: state.selectedObject.selectedSegment,
         userPreferences: state.userPreferences
     }
 }

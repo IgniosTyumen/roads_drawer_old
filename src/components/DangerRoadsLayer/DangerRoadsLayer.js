@@ -1,35 +1,47 @@
 import React, {Fragment} from "react";
-import {Polyline} from "react-leaflet";
+import {CircleMarker, Polyline} from "react-leaflet";
+import getPointsArrayFromLinestring from "../../utils/getPointsArrayFromLinestring";
+import getPointsArrayFromPoint from "../../utils/getPointsArrayFromPoints";
+import DangerRoadPopup from "../DangerRoadPopup/DangerRoadPopup";
 
 const DangerRoadsLayer = (props) => {
     const {dangerRoads, userPreferences} = props;
     let Elements;
     if (dangerRoads && dangerRoads.dangers) {
         Elements = dangerRoads.dangers.map((road,position) => {
-            const pointsStr = road['path'];
+            let pointsStr = road['path'];
+            if (!pointsStr || pointsStr[0] =='P')
+                pointsStr = road['segment'] ? road['segment']['line_path'] : null
             if (pointsStr) {
-                const pointsStrArr = pointsStr.replace('LINESTRING (', '').replace(')', '').split(',');
-                let points = [];
-                for (let it = 0; it < pointsStrArr.length; it++) {
-                    const pointStr = pointsStrArr[it].trim().split(' ');
-                    const point1 = Number.parseFloat(pointStr[1]).toFixed(6);
-                    const point2 = Number.parseFloat(pointStr[0]).toFixed(6);
-                    points.push([point1, point2]);
+                if (pointsStr[0].toLowerCase() === 'p') {
+                    let points = getPointsArrayFromPoint(pointsStr);
+                    return <CircleMarker center={points} radius={5} color={'#aa00cc'}>
+
+                    </CircleMarker>
+                } else {
+                    let points = getPointsArrayFromLinestring(pointsStr);
+
+                    return (
+                        <Fragment>
+                            <Polyline positions={points} key={'danger' + position}
+                                      color={userPreferences.dangerRoadsColor1}
+                                      weight={userPreferences.dangerRoadsWidth}
+                                      onContextMenu={(event) => {
+                                      }}>
+                                <DangerRoadPopup road={road}/>
+                            </Polyline>
+                            <Polyline positions={points} key={'dangerdash' + position}
+                                      dashArray={[`${userPreferences.dangerRoadsStrokeLength}`, `${userPreferences.dangerRoadsStrokeLength}`]}
+                                      dashOffset={`${userPreferences.dangerRoadsStrokeLength}`}
+                                      color={userPreferences.dangerRoadsColor2}
+                                      weight={userPreferences.dangerRoadsWidth}
+                                      onContextMenu={(event) => {
+                                      }}>
+                                <DangerRoadPopup road={road}/>
+                            </Polyline>
+                        </Fragment>
+                    )
                 }
-                return (
-                    <Fragment>
-                    <Polyline positions={points} key={position} color={userPreferences.dangerRoadsColor1} weight={userPreferences.dangerRoadsWidth}
-                              onContextMenu={(event) => {
-                              }}>
-
-                    </Polyline>
-                    <Polyline positions={points} key={position} dashArray={[`${userPreferences.dangerRoadsStrokeLength}`,`${userPreferences.dangerRoadsStrokeLength}`]} dashOffset={`${userPreferences.dangerRoadsStrokeLength}`} color={userPreferences.dangerRoadsColor2}  weight={userPreferences.dangerRoadsWidth}
-                              onContextMenu={(event) => {
-                              }}>
-
-                    </Polyline>
-                    </Fragment>
-                )
             }
         });
     }

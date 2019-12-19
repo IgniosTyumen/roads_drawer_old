@@ -14,6 +14,8 @@ import waypointTemplate from "~/reducers/waypointTemplate";
 import userAuth from "~/reducers/userAuth";
 import newRoadTemplate from "~/reducers/newRoadTemplate";
 import schema from "~/reducers/schema";
+import activeRoad from "~/reducers/activeRoad";
+import urlAutocompleteDictionaries from "~/reducers/urlAutocompleteDictionaries";
 
 
 export default combineReducers({
@@ -31,5 +33,7 @@ export default combineReducers({
   waypointTemplate,
   userAuth,
   newRoadTemplate,
+  activeRoad,
+  urlAutocompleteDictionaries,
   schema
 })

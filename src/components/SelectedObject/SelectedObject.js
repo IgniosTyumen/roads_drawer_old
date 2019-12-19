@@ -6,16 +6,28 @@ import RoadPopupContainer from "../RoadPopup/RoadPopupContainer";
 import getPointsArrayFromPoint from "../../utils/getPointsArrayFromPoints";
 
 const SelectedObject = props => {
-    const {road, bridge,dangerRoad, userPreferences} = props;
-    let DrawableElement;
-
+    const {road, bridge,dangerRoad, userPreferences, segment} = props;
+    let DrawableElement = null;
 
     if (road) {
-        const geometry = getPointsArrayFromLinestring(road.line_path);
-        DrawableElement =
-            <Polyline positions={geometry} key={road.id} color={invertColor(userPreferences.roadColor)} weight={userPreferences.roadWidth*2}>
-                <RoadPopupContainer road={road}/>
-            </Polyline>
+        let geometry =[];
+        if (road.line_path) {
+            geometry = getPointsArrayFromLinestring(road.line_path);
+            DrawableElement =
+                <Polyline positions={geometry} key={road.id} color={invertColor(userPreferences.roadColor)} weight={userPreferences.roadWidth*2}>
+                    <RoadPopupContainer road={road}/>
+                </Polyline>
+        }
+    } else
+    if (segment) {
+        let geometry =[];
+        if (segment.line_path) {
+            geometry = getPointsArrayFromLinestring(segment.line_path);
+            DrawableElement =
+                <Polyline positions={geometry} key={'segment-selected'+segment.id} color={'#C571BF'} weight={userPreferences.roadWidth*2}>
+                    {/*<RoadPopupContainer road={road}/>*/}
+                </Polyline>
+        }
     } else
     if (bridge) {
         const geometry = getPointsArrayFromPoint(bridge.point)[0];
@@ -27,7 +39,13 @@ const SelectedObject = props => {
         }
     }else
     if (dangerRoad) {
-        const geometry = getPointsArrayFromLinestring(dangerRoad.path);
+        let geometry =[];
+        if (dangerRoad.path){
+            geometry = getPointsArrayFromLinestring(dangerRoad.path);
+        } else {
+            geometry = getPointsArrayFromLinestring(dangerRoad.segments.line_path);
+        }
+
         if (geometry) {
             DrawableElement =
                 <Fragment>
@@ -44,12 +62,20 @@ const SelectedObject = props => {
                 </Fragment>
         }
     }
-
-    return (
-        <Fragment>
-            {DrawableElement}
+    if (DrawableElement){
+        console.log(DrawableElement)
+        return (
+            <Fragment>
+                {DrawableElement}
+            </Fragment>
+        )
+    } else {
+        console.log(DrawableElement)
+        return <Fragment>
+            <CircleMarker center={[0,0]}/>
         </Fragment>
-    )
+    }
+
 };
 
 export default SelectedObject;

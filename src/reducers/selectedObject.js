@@ -1,13 +1,10 @@
-import {
-    SELECT_ROAD,
-    SELECT_BRIDGE,
-    SELECT_DANGER_ROAD
-} from '~/constants/SelectConstants'
+import {SELECT_BRIDGE, SELECT_DANGER_ROAD, SELECT_ROAD, SELECT_SEGMENT} from '~/constants/SelectConstants'
 
 const initialState = {
     selectedRoad: undefined,
     selectedBridge: undefined,
     selectedDangerRoad: undefined,
+    selectedSegment: undefined
 
 };
 
@@ -25,6 +22,10 @@ export default function selectedObject(state = initialState, action) {
         case SELECT_DANGER_ROAD:
             return {
                 selectedDangerRoad: action.payload
+            };
+            case SELECT_SEGMENT:
+            return {
+                selectedSegment: action.payload
             };
         default:
             return state;

@@ -1,5 +1,6 @@
 import {axiosInstance} from "~/utils/axiosInstance";
 import axios from 'axios';
+import getLinestringFromArray from "../utils/getLinestringFromArray";
 
 
 const getSCRF = async () =>
@@ -13,6 +14,14 @@ const getSCRF = async () =>
 export const roadsApi = {
     getAllRoads (){
         return axiosInstance.get('/common/full_roads')
+    },
+    getAllSegments (){
+        return axiosInstance.get('/safe_roads/roadssegments',{
+            params: {
+                with_params:true
+            }
+        })
+
     },
     getAllObjects (roadId){
         return axiosInstance.get('/common/full_roads',{
@@ -78,18 +87,35 @@ export const bridgesApi = {
 
 export const dangersApi = {
     getAllDangers(page=1){
-        return axiosInstance.get('/directory/accidentalroadsections',{
+        return axiosInstance.get('/directory/menatwork',{
             params: {
                 page:page
             }
         })
     },
     async getDangerRoadInfoById(id){
-        const response = await axiosInstance.get(`/directory/accidentalroadsections/${id}`);
+        const response = await axiosInstance.get(`/directory/menatwork/filteredBydate_time_start_plan=2019-01-01T00:00:00+0500/page=${id}`);
         return response.data
     }
 
 };
+//TODO MODITFY NAMING
+// export const dangersApi = {
+//     getAllDangers(page=1){
+//         return axiosInstance.get('/directory/accidentalroadsections',{
+//             params: {
+//                 page:page
+//             }
+//         })
+//     },
+//     async getDangerRoadInfoById(id){
+//         const response = await axiosInstance.get(`/directory/accidentalroadsections/${id}`);
+//         return response.data
+//     }
+//
+// };
+
+
 
 export const signsApi = {
     getAllSigns(page=1){
@@ -121,6 +147,15 @@ export const userApi = {
     getUserAccessParams(){
         return axiosInstance.get('https://av.admtyumen.ru/current_user_params/')
     },
+};
+export const dictionariesApi = {
+    getCities(){
+        return axiosInstance.get('/common/city')
+    },
+    getDistricts(){
+        return axiosInstance.get('/common/district')
+    },
+
 };
 
 export const documentsApi = {
@@ -175,6 +210,26 @@ export const schemaApi = {
     getSchema(){
         return axiosInstance.get(
             '/directory/roaddirectory/schema'
+        )
+    }
+}
+
+export const segmentsApi = {
+    async updateSegmentLinepath(segment){
+        const scrf = await getSCRF();
+        return axiosInstance.post(
+            '/common/full_roads',
+            {
+                path: getLinestringFromArray(segment.geometry.points),
+                road_id: segment.road_id,
+                save_path_only: true,
+                segment_id: segment.id,
+            },
+            {
+                headers: {
+                    'x-csrf-token':scrf,
+                }
+            }
         )
     }
 }

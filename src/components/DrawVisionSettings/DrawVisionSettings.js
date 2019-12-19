@@ -1,5 +1,5 @@
-import React, {Fragment, useEffect, useState} from "react";
-import {Slider, InputNumber, Row, Col, Checkbox} from 'antd';
+import React, {useState} from "react";
+import {Col, Row, Slider} from 'antd';
 
 const DrawVisionSettings = props => {
 
@@ -12,6 +12,7 @@ const DrawVisionSettings = props => {
         end: Number.parseInt(userPreferences.endDrawMarkerSize),
         middle: Number.parseInt(userPreferences.middleDrawMarkerSize),
         pseudo: Number.parseInt(userPreferences.pseudoDrawMarkerSize),
+        width: Number.parseInt(userPreferences.pseudoDrawMarkerSize),
     });
 
 
@@ -46,6 +47,24 @@ const DrawVisionSettings = props => {
 
     return (
         <div className={"settingsBlock"}>
+            <div className={'settingsBlock'}>
+                <Row align={'middle'}>
+                    <Col span={6}>
+                        <p>Ширина линии рисования</p>
+                    </Col>
+                    <Col span={18}>
+                        <Slider
+                            min={0.5}
+                            max={10}
+                            onChange={(value)=>handleSizeChange(value,'width')}
+                            onAfterChange={(value)=>handleAfterChange(value,'width')}
+                            value={typeof sizeArray.width === 'number' ? sizeArray.width : 0}
+                            step={0.1}
+                            included={true}
+                        />
+                    </Col>
+                </Row>
+            </div>
             <div className={'settingsBlock'}>
                 <Row align={'middle'}>
                     <Col span={6}>

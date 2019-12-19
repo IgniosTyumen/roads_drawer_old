@@ -1,10 +1,10 @@
-import React, {Fragment} from "react";
+import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 
 const DrawPanel = (props) => {
 
     const {handleProjectTemplate, handleReverse, editMode, pullMode, handleSwitchPullMode, handleSwitchEditMode,
-        handleUndo, blockPanel, templateHistoryIsEmpty, waypointsTemplateGeometry,handleSave} = props;
+        handleUndo, blockPanel, templateHistoryIsEmpty, waypointsTemplateGeometry,handleSave,handleClean} = props;
 
     const ProjectionSVG = <svg width="15" height="15" viewBox="0 0 718 709" fill="none"
                                xmlns="http://www.w3.org/2000/svg">
@@ -44,6 +44,10 @@ const DrawPanel = (props) => {
             fill="black"/>
     </svg>
 
+    const EraserSVG = <svg width="15" height="15" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.09999 13L14.5 5.8C15.1 5.1 15.1 4 14.4 3.3L11.7 0.6C11.4 0.2 10.9 0 10.4 0H8.59999C8.09999 0 7.59999 0.2 7.19999 0.6L0.499989 8.2C-0.100011 8.9 -0.100011 10.1 0.599989 10.7L3.29999 13.4C3.59999 13.8 4.09999 14 4.59999 14H16V13H8.09999V13ZM6.79999 12.9C6.79999 12.9 6.79999 12.8 6.79999 12.9L4.09999 10.2C3.69999 9.8 3.69999 9.3 4.09999 8.9L7.49999 5H6.49999L3.49999 8.3C2.89999 9 2.89999 10 3.59999 10.7L5.89999 13H4.59999C4.39999 13 4.19999 12.9 3.99999 12.8L1.19999 10C0.899989 9.7 0.899989 9.2 1.19999 8.9L4.69999 5H6.49999L9.99999 1H11L7.49999 5L10.6 8.7L7.09999 12.7C6.99999 12.8 6.89999 12.8 6.79999 12.9V12.9Z" fill="black"/>
+    </svg>
+
     return (
 
         <div>
@@ -70,6 +74,9 @@ const DrawPanel = (props) => {
                 </IconButton> : null}
                 <IconButton color="primary" aria-label="Сохранить" onClick={handleSave}>
                     {SaveSVG}
+                </IconButton>
+                <IconButton color="primary" aria-label="Стереть" onClick={handleClean}>
+                    {EraserSVG}
                 </IconButton>
             </div>
             }

@@ -22,12 +22,20 @@ const RoadDetailObjectContainer = props => {
         selectObjectsActions.selectRoad(object);
     }
 
+    const markAsActiveForGeometry = () => {
+        dispatch({
+            type: 'SELECT_ROAD_TO_WORK',
+            payload: object
+        })
+    }
+
     return (
         <RoadDetailObject
             uploadFullRoadInfo={uploadFullRoadInfo}
             object={object}
             handleSelectDetailedObject={handleSelectDetailedObject}
             moveMapToObject={moveMapToObject}
+            markAsActiveForGeometry={markAsActiveForGeometry}
         />
     )
 };

@@ -16,11 +16,9 @@ class SelectLoadingComponent extends React.Component {
 
     onDropdownVisibleChange(){
         this.setState({dataset:[],fetching:true});
-        debugger
         axiosInstance.get(this.props.url).then(
             response=>this.setState({dataset:response.data.objects,fetching:false})
         )
-        debugger;
     }
 
 

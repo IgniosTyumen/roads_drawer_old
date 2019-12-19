@@ -1,23 +1,20 @@
 import {
-    SET_WAYPOINT_TEMPLATE,
-    SAVE_WAYPOINT_TEMPLATE,
-    CHANGE_WAYPOINT_STATUS,
-    CHANGE_WAYPOINT_COMMENT,
-    NEW_WAYPOINT_TEMPLATE,
-    CHANGE_CHECKPOINT_STATUS,
-    CHANGE_CHECKPOINT_POSITION,
     ADD_CHECKPOINT_MARKER,
+    CHANGE_ALL_CHECKPOINTS,
+    CHANGE_CHECKPOINT_POSITION,
+    CHANGE_DISTRICT_OF_TEMPLATE_WAYPOINT,
+    CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT,
+    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
+    FINISH_WORK_WITH_ROAD,
+    NEW_WAYPOINT_TEMPLATE,
     PUSH_CHECKPOINT_MARKER,
     PUSH_CHECKPOINT_MARKER_TO_START,
     REMOVE_CHECKPOINT_MARKER,
-    CHANGE_ALL_CHECKPOINTS,
-    SWAP_CHECKPOINTS_DIRECTION,
     SAVE_DIRECTION,
-    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
-    CHANGE_DISTRICT_OF_TEMPLATE_WAYPOINT,
-    CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT,
-    REMOVE_WAYPOINT
+    SET_WAYPOINT_TEMPLATE,
+    SWAP_CHECKPOINTS_DIRECTION
 } from '~/constants/WaypointsConstants'
+import getPointsArrayFromLinestring from "../utils/getPointsArrayFromLinestring";
 
 const initialState = {
     templateWaypoint: undefined,
@@ -53,8 +50,14 @@ export default function waypointTemplate(state = initialState, action) {
                 return newState;
             }
         case SET_WAYPOINT_TEMPLATE:
+            let templateWaypoint = {...action.waypoint};
+            if (!templateWaypoint.geometry) {
+                templateWaypoint.geometry = {
+                    points: getPointsArrayFromLinestring(templateWaypoint.line_path),
+                };
+            }
             return {
-                templateWaypoint: action.waypoint,
+                templateWaypoint: {...templateWaypoint},
                 orderNumber: action.orderId,
                 waypointNumber: action.waypointId
             }
@@ -139,6 +142,9 @@ export default function waypointTemplate(state = initialState, action) {
                     importance: action.payload
                 }
             }
+        }
+        case FINISH_WORK_WITH_ROAD: {
+            return {...initialState}
         }
         default:
             return state;

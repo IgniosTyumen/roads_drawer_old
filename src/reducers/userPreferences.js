@@ -1,33 +1,32 @@
 import {
-    SET_ROAD_COLOR,
-    SET_ROAD_WEIGHT,
-    SET_SIGNS_PREFERENCES,
+    SAVE_USER_REFERENCES,
+    SET_ALL_USER_PREFERENCES,
     SET_DANGER_ROAD_COLOR_MAIN_PREFERENCES,
     SET_DANGER_ROAD_COLOR_SECONDARY_PREFERENCES,
-    SET_DANGER_ROAD_WIDTH_PREFERENCES,
     SET_DANGER_ROAD_STROKE_LENGTH_PREFERENCES,
-    SET_ALL_USER_PREFERENCES,
-    SAVE_USER_REFERENCES,
+    SET_DANGER_ROAD_WIDTH_PREFERENCES,
+    SET_DRAW_MARKER_SIZE,
+    SET_ROAD_COLOR,
+    SET_ROAD_COLOR_SEGMENT,
     SET_ROAD_ENDPOINTS_VISIBLE,
     SET_ROAD_ENDPOINTS_WIDTH,
-
-    SET_ROUTE_FEDERAL_COLOR,
-    SET_ROUTE_REGIONAL_COLOR,
-    SET_ROUTE_MUNICIPAL_COLOR,
-    SET_ROUTE_FEDERAL_WEIGHT,
-    SET_ROUTE_REGIONAL_WEIGHT,
-    SET_ROUTE_MUNICIPAL_WEIGHT,
+    SET_ROAD_WEIGHT,
+    SET_ROAD_WEIGHT_SEGMENT,
     SET_ROUTE_ENDPOINTS_VISIBLE,
     SET_ROUTE_ENDPOINTS_WIDTH,
-    SET_DRAW_MARKER_SIZE,
-
-    SET_SIGNS_SIZE,
-    SET_SIGNS_DRAW_MAP_ZOOM_MIN,
+    SET_ROUTE_FEDERAL_COLOR,
+    SET_ROUTE_FEDERAL_WEIGHT,
+    SET_ROUTE_MUNICIPAL_COLOR,
+    SET_ROUTE_MUNICIPAL_WEIGHT,
+    SET_ROUTE_REGIONAL_COLOR,
+    SET_ROUTE_REGIONAL_WEIGHT,
     SET_SIGNS_DRAW_MAP_ZOOM_MAX,
-
+    SET_SIGNS_DRAW_MAP_ZOOM_MIN,
+    SET_SIGNS_PREFERENCES,
+    SET_SIGNS_SIZE
 } from '~/constants/UserSettingsConstants'
 
-const initialState = {
+export const initialState = {
     signsVisibleList: [
         "1", "1.1", "1.2", "1.3.1", "1.3.2", "1.4.1", "1.4.2", "1.4.3", "1.4.4", "1.4.5", "1.4.6", "1.5", "1.6", "1.7", "1.8", "1.9", "1.10", "1.11.1", "1.11.2", "1.12.1", "1.12.2", "1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20.1", "1.20.2", "1.20.3", "1.21", "1.22", "1.23", "1.24", "1.25", "1.26", "1.27", "1.28", "1.29", "1.30", "1.31", "1.32", "1.33", "1.34.1", "1.34.2", "1.34.3", "1.35",
         "2", "2.1", "2.2", "2.3.1", "2.3.2", "2.3.3", "2.3.4", "2.3.5", "2.3.6", "2.3.7", "2.4", "2.5", "2.6", "2.7",
@@ -62,10 +61,14 @@ const initialState = {
     endDrawMarkerSize: 5,
     middleDrawMarkerSize: 5,
     pseudoDrawMarkerSize: 5,
+    widthDrawLine: 3,
 
     signsSize: 100,
     zoomMinSignsRender: 5,
     zoomMaxSignsRender: 16,
+    segmentColor: '#19a',
+    segmentWidth: 3,
+
 };
 
 export default function userPreferences(state = initialState, action) {
@@ -79,6 +82,16 @@ export default function userPreferences(state = initialState, action) {
             return {
                 ...state,
                 roadColor: action.payload,
+            }
+            case SET_ROAD_COLOR_SEGMENT:
+            return {
+                ...state,
+                segmentColor: action.payload,
+            }
+            case SET_ROAD_WEIGHT_SEGMENT:
+            return {
+                ...state,
+                segmentWidth: action.payload,
             }
 
 
@@ -182,7 +195,8 @@ export default function userPreferences(state = initialState, action) {
                 startDrawMarkerSize: action.startDrawMarkerSize,
                 endDrawMarkerSize: action.endDrawMarkerSize,
                 middleDrawMarkerSize: action.middleDrawMarkerSize,
-                pseudoDrawMarkerSize: action.pseudoDrawMarkerSize
+                pseudoDrawMarkerSize: action.pseudoDrawMarkerSize,
+                widthDrawLine:action.widthDrawLine
             }
 
 
@@ -211,7 +225,10 @@ export default function userPreferences(state = initialState, action) {
                 pseudoDrawMarkerSize: action.pseudoDrawMarkerSize,
                 signsSize: action.signsSize,
                 zoomMinSignsRender: action.zoomMinSignsRender,
-                zoomMaxSignsRender: action.zoomMaxSignsRender
+                zoomMaxSignsRender: action.zoomMaxSignsRender,
+                widthDrawLine:action.widthDrawLine,
+                segmentColor: action.segmentColor,
+                segmentWidth: action.segmentWidth,
 
             }
 
@@ -239,6 +256,9 @@ export default function userPreferences(state = initialState, action) {
             localStorage.setItem('signsSize', state.signsSize);
             localStorage.setItem('zoomMinSignsRender', state.zoomMinSignsRender);
             localStorage.setItem('zoomMaxSignsRender', state.zoomMaxSignsRender);
+            localStorage.setItem('widthDrawLine', state.widthDrawLine);
+            localStorage.setItem('segmentColor', state.segmentColor);
+            localStorage.setItem('segmentWidth', state.segmentWidth);
 
             return state;
         }

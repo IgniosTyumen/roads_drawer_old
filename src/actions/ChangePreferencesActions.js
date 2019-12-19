@@ -1,29 +1,28 @@
 import {
-    SET_ROAD_COLOR,
-    SET_ROAD_WEIGHT,
-    SET_SIGNS_PREFERENCES,
+    SAVE_USER_REFERENCES,
     SET_DANGER_ROAD_COLOR_MAIN_PREFERENCES,
     SET_DANGER_ROAD_COLOR_SECONDARY_PREFERENCES,
-    SET_DANGER_ROAD_WIDTH_PREFERENCES,
     SET_DANGER_ROAD_STROKE_LENGTH_PREFERENCES,
-    SET_ALL_USER_PREFERENCES,
-    SAVE_USER_REFERENCES,
+    SET_DANGER_ROAD_WIDTH_PREFERENCES,
+    SET_DRAW_MARKER_SIZE,
+    SET_ROAD_COLOR,
+    SET_ROAD_COLOR_SEGMENT,
     SET_ROAD_ENDPOINTS_VISIBLE,
     SET_ROAD_ENDPOINTS_WIDTH,
-    SET_ROUTE_FEDERAL_COLOR,
-    SET_ROUTE_REGIONAL_COLOR,
-    SET_ROUTE_MUNICIPAL_COLOR,
-    SET_ROUTE_FEDERAL_WEIGHT,
-    SET_ROUTE_REGIONAL_WEIGHT,
-    SET_ROUTE_MUNICIPAL_WEIGHT,
+    SET_ROAD_WEIGHT,
+    SET_ROAD_WEIGHT_SEGMENT,
     SET_ROUTE_ENDPOINTS_VISIBLE,
     SET_ROUTE_ENDPOINTS_WIDTH,
-    SET_DRAW_MARKER_SIZE,
-
-    SET_SIGNS_SIZE,
-    SET_SIGNS_DRAW_MAP_ZOOM_MIN,
+    SET_ROUTE_FEDERAL_COLOR,
+    SET_ROUTE_FEDERAL_WEIGHT,
+    SET_ROUTE_MUNICIPAL_COLOR,
+    SET_ROUTE_MUNICIPAL_WEIGHT,
+    SET_ROUTE_REGIONAL_COLOR,
+    SET_ROUTE_REGIONAL_WEIGHT,
     SET_SIGNS_DRAW_MAP_ZOOM_MAX,
-
+    SET_SIGNS_DRAW_MAP_ZOOM_MIN,
+    SET_SIGNS_PREFERENCES,
+    SET_SIGNS_SIZE
 } from '~/constants/UserSettingsConstants'
 
 export const changeRoadColor = (colorHexCode) => (dispatch) => {
@@ -36,6 +35,20 @@ export const changeRoadColor = (colorHexCode) => (dispatch) => {
 export const changeRoadLineWeight = (lineWidth) => (dispatch) => {
     dispatch({
         type:SET_ROAD_WEIGHT,
+        payload:lineWidth
+    })
+};
+
+export const changeColorSegment = (colorHexCode) => (dispatch) => {
+    dispatch({
+        type:SET_ROAD_COLOR_SEGMENT,
+        payload:colorHexCode
+    })
+};
+
+export const changeSegmentLineWeight = (lineWidth) => (dispatch) => {
+    dispatch({
+        type:SET_ROAD_WEIGHT_SEGMENT,
         payload:lineWidth
     })
 };
@@ -169,19 +182,20 @@ export const changeDrawMarkerSize = (sizeArray=5) => dispatch => {
         endDrawMarkerSize : sizeArray.end,
         middleDrawMarkerSize : sizeArray.middle,
         pseudoDrawMarkerSize : sizeArray.pseudo,
+        widthDrawLine : sizeArray.width,
 
     })
 }
 
 
-export const changeSignsZoomAvailable = ([min,max]) => dispatch => {
+export const changeSignsZoomAvailable = (array) => dispatch => {
     dispatch({
         type:SET_SIGNS_DRAW_MAP_ZOOM_MIN,
-        payload:min
+        payload:array[0][0]
     })
     dispatch({
         type:SET_SIGNS_DRAW_MAP_ZOOM_MAX,
-        payload:max
+        payload:array[0][1]
     })
 }
 
@@ -191,3 +205,4 @@ export const changeSignsSize = (size) => dispatch => {
         payload:size
     })
 }
+

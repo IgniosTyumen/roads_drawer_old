@@ -79,7 +79,7 @@ const WaypointTemplateLayer = props => {
     }
 
     const handleDeleteMarker = (index) => {
-        if (templateWaypoint.geometry.points.length===1) {
+        if (templateWaypoint.geometry.length===1) {
             appActions.enableAddMarkerMode();
         }
         waypointActions.deleteCheckpoint(index);
@@ -127,7 +127,7 @@ const WaypointTemplateLayer = props => {
         const coords = [(geoArray[it][0]+geoArray[it+1][0])/2,(geoArray[it][1]+geoArray[it+1][1])/2];
         SemimarkersArray.push(<Marker position={coords} draggable={true} onMoveEnd={(event)=>{addMarkerOnPosition(it, event)}}  icon={pseudoPointIcon}/>)
     }
-    const Poly = <Polyline positions={geoArray} color={'black'} weight={5} key={'template'} />
+    const Poly = <Polyline positions={geoArray} color={'black'} weight={userPreferences.widthDrawLine} key={'template'} />
 
     return (
         <Fragment>

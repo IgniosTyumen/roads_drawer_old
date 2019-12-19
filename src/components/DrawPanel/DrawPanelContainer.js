@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import DrawPanel from "./DrawPanel";
-import {roadsApi, testRequests} from "../../api/api";
+import {roadsApi} from "../../api/api";
 import * as waypointActions from '~/actions/WaypointActions'
 import * as appActions from '~/actions/AppActions'
 import getPointsArrayFromLinestring from "../../utils/getPointsArrayFromLinestring";
@@ -46,6 +46,13 @@ const handleUndo = () => {
     setTemplateHistory([]);
 }
 
+const handleClean = () => {
+        if (!waypointsTemplateGeometry.geometry.points.length) {
+            setTemplateHistory(waypointsTemplateGeometry.geometry.points)
+        }
+        waypointActions.changeCheckpoint([])
+}
+
 const handleSave = () => {
     waypointActions.saveWaypoint(waypointTemplate,userAuth)
 }
@@ -75,6 +82,7 @@ return (
         blockPanel={blockPanel}
         editMode={editMode}
         pullMode={pullMode}
+        handleClean={handleClean}
         templateHistoryIsEmpty={(templateHistory.length === 0)}
     />
 )

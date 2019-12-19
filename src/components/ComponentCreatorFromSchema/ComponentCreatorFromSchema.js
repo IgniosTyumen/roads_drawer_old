@@ -1,6 +1,7 @@
 import React from "react";
-import {Input, InputNumber, Select} from 'antd';
+import {Checkbox, DatePicker, Input, InputNumber, Select} from 'antd';
 import SelectLoadingComponent from "../SelectLoadingComponent/SelectLoadingComponent";
+import locale from 'antd/es/date-picker/locale/ru_RU';
 
 const { Option } = Select;
 
@@ -76,11 +77,27 @@ export const ComponentCreatorFromSchema = (name, description, onChangeCallbackFu
             }
         }
         case 'MANYTOONE': {
-
-            debugger
             const link = debugAddress ? debugAddress + description.url : description.url;
             console.log(link)
             return <SelectLoadingComponent url={link} onChangeCallbackFunction={onChangeCallbackFunction} optionsid={description.pk_field} optionsValue={description.display_field}/>
+        }
+        case 'bool': {
+            return <Checkbox onChange={onChangeCallbackFunction}>{description.info.verbose_name}</Checkbox>
+        }
+        case 'datetime':{
+            return <DatePicker
+                showTime
+                placeholder={description.info.verbose_name}
+                onChange={onChangeCallbackFunction}
+                onOk={onChangeCallbackFunction}
+                open={true}
+
+                onClick={(event)=>{
+                    event.preventDefault()
+                }}
+                locale={locale}
+                dropdownClassName={'calendar'}
+            />
         }
         default:
             return null

@@ -11,8 +11,8 @@ import SignsLayerContainer from "../SignsLayer/SignsLayerContainer";
 import DangerRoadsLayerContainer from "../DangerRoadsLayer/DangerRoadsLayerContainer";
 import SelectedObjectContainer from "../SelectedObject/SelectedObjectContainer";
 import PrintControlDefault from 'react-leaflet-easyprint';
-import OrderPreviewLayerContainer from "../OrderPreviewLayer/OrderPreviewLayerContainer";
 import WaypointTemplateLayerContainer from "../WaypointTemplateLayer/WaypointTemplateLayerContainer";
+import ActiveRoadPreviewLayerContainer from "../ActiveRoadPreviewLayer/ActiveRoadPreviewLayerContainer";
 
 
 class Map extends React.Component {
@@ -67,10 +67,12 @@ class Map extends React.Component {
 
                 <RoadsLayerContainer/>
                 <BridgesLayerContainer/>
-                {(zoom>=userPreferences.zoomMinSignsRender && zoom<=userPreferences.zoomMinSignsRender)  && <SignsLayerContainer/>}
+                {(zoom>=userPreferences.zoomMinSignsRender && zoom<=userPreferences.zoomMaxSignsRender)  && <SignsLayerContainer/>}
                 <DangerRoadsLayerContainer/>
                 <SelectedObjectContainer/>
-                <OrderPreviewLayerContainer/>
+                {/*<OrderPreviewLayerContainer/>*/}
+                <ActiveRoadPreviewLayerContainer/>
+
                 <WaypointTemplateLayerContainer/>
 
                 <PrintControl ref={(ref) => {

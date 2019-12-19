@@ -3,7 +3,7 @@
 .mainControlPanel{
     z-index: 1800;
     position: absolute;
-    width: 506px;
+    width: 566px;
     height: fit-content;
     max-height: 100vh;
     top:0;
@@ -43,13 +43,13 @@
 .closedMainControlPanel{
     animation-duration: 0.75s;
     animation-name: sliderOutFromRightMain;
-    left: -506px;
+    left: -566px;
 }
 
 
 @keyframes sliderFromRightMain {
     from {
-        left: -506px;
+        left: -566px;
     }
     to {
         left: 0px;
@@ -60,7 +60,7 @@
         left: 0px;
     }
     to {
-        left: -506px;
+        left: -566px;
     }
 }
 
@@ -95,7 +95,7 @@
 }
 
 .initClosedPanel{
-    left:-506px
+    left:-566px
 }
 
 .MuiSelect-select{
@@ -239,10 +239,10 @@
 }
 
 .mainGroupWindow.closed {
-    width: 506px;
+    width: 566px;
     height: fit-content;
     z-index: 1400;
-    /*top: -506px;*/
+    /*top: -566px;*/
     transform: rotateX(-90deg);
     transition: transform 0.3s linear;
 
@@ -299,7 +299,7 @@
 }
 
 .mainGroupPanel {
-    width: 484px;
+    width: 566px;
 }
 
 .detailsObjectPanel {
@@ -309,7 +309,7 @@
     height: 89vh;
     position: absolute;
     top: 103px;
-    left: 506px;
+    left: 566px;
     padding: 5px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -336,22 +336,25 @@
 
 .ReactVirtualized__Table__headerRow{
     display: flex;
+    text-align: left;
+    text-align: center;
 }
 
 .ReactVirtualized__Table__row{
     display: flex;
-    border: 1px solid gray;
+    border-top: 1px solid gray;
+    align-items: center;
 }
 
 .ReactVirtualized__Table__headerColumn{
-    text-align: center;
+    text-align: left;
 }
 
 .ReactVirtualized__Table__rowColumn{
     text-align: left;
     padding: 5px;
-    padding-left: 20px;
     user-select: none;
+    margin-top: auto;
 }
 
 
@@ -533,4 +536,8 @@
 .tabSector{
     display: flex;
     justify-content: space-around;
+}
+
+.calendar{
+    z-index: 2500;
 }

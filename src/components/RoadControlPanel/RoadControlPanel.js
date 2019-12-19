@@ -91,11 +91,12 @@ const RoadControlPanel = (props) => {
             <TagsCloud tags={tagsList} tagsRemoveAction={handlerRemoveTag}/>
             <div>
 
-                <Table
-                    width={484}
-                    height={681}
+
+               <Table
+                    width={566}
+                    height={710}
                     headerHeight={50}
-                    rowHeight={25}
+                    rowHeight={50}
                     rowCount={iteratedObject.length}
                     rowGetter={({index}) => iteratedObject[index]}
                     onRowClick={({index})=>{
@@ -104,18 +105,23 @@ const RoadControlPanel = (props) => {
                     }}
                 >
 
-                    <Column width={484}  dataKey={'name'} label={'Название дороги'}/>
+                    <Column width={184}  dataKey={'name'} label={'Наименование'}/>
+                    <Column width={80}  dataKey={'district_name'} label={'Округ'}/>
+                    <Column width={80}  dataKey={'city_name'} label={'Город'}/>
+                    <Column width={121}  dataKey={'road_number'} label={'№ дороги'}/>
+                    <Column width={70}  dataKey={'start_road'} label={'Начало, км'}/>
+                    <Column width={70}  dataKey={'end_road'} label={'Конец, км'}/>
 
                 </Table>
 
-                <div>
-                    <a href='https://av.admtyumen.ru/#/directory/roaddirectory/inst_id=24' target='_blank'>заполнить</a>
-                </div>
 
-                <div onClick={containerCallbacks.handleCreateNewRoadButtonClicked} className={'orderMainPanelContainerButton ripple'} style={{marginTop:'10px'}}>
-                        {NewRoadSVG}
-                    <span>Добавить дорогу</span>
-                </div>
+
+
+
+                {/*<div onClick={containerCallbacks.handleCreateNewRoadButtonClicked} className={'orderMainPanelContainerButton ripple'} style={{marginTop:'10px'}}>*/}
+                {/*        {NewRoadSVG}*/}
+                {/*    <span>Добавить дорогу</span>*/}
+                {/*</div>*/}
                 <NewRoadModalContainer/>
             </div>
         </div>

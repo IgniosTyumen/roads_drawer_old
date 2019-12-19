@@ -1,14 +1,10 @@
-import {
-  SET_CENTER,
-  GEOMETRY_WIGHT,
-  SET_VIEWPORT_COORDINATES,
-  SET_ZOOM,
-  SET_CENTER_AND_ZOOM
-} from "~/constants/Map";
+import {GEOMETRY_WIGHT, SET_CENTER, SET_CENTER_AND_ZOOM, SET_VIEWPORT_COORDINATES, SET_ZOOM} from "~/constants/Map";
 
 import {
-  ENABLE_ADD_MARKER_MODE,
   DISABLE_ADD_MARKER_MODE,
+  ENABLE_ADD_MARKER_MODE,
+  SET_DRAW_ALGORITHM,
+  SET_ROADS_TYPE_FILTER,
   SWITCH_ADD_MARKER_MODE,
   SWITCH_PULL_MARKER_MODE
 } from "~/constants/AppGlobalConstants";
@@ -21,6 +17,8 @@ const initialState = {
   viewport : [57.144075, 65.5579277777778],
   editMode: false,
   pullMode: false,
+  drawAlgorithm: 'roadpath',
+  visibleRoads: ['municipal','regional','federal', 'unknown']
 }
 
 export default function map(state = initialState, action) {
@@ -47,11 +45,14 @@ export default function map(state = initialState, action) {
         geometryWight: action.payload
       }
       case SET_VIEWPORT_COORDINATES:
-      return {
-        ...state,
-        center: action.viewport,
-        zoom: action.zoom
-      }
+        if (action.viewport && action.zoom){
+          return {
+            ...state,
+            center: action.viewport,
+            zoom: action.zoom
+          }
+        } else
+        return state
     case ENABLE_ADD_MARKER_MODE:
       return {
         ...state,
@@ -61,6 +62,16 @@ export default function map(state = initialState, action) {
       return {
         ...state,
         editMode: false,
+      }
+    case SET_DRAW_ALGORITHM:
+      return {
+        ...state,
+        drawAlgorithm: action.payload,
+      }
+    case SET_ROADS_TYPE_FILTER:
+      return {
+        ...state,
+        visibleRoads: action.payload,
       }
       case SWITCH_ADD_MARKER_MODE:
         if (!state.pullMode) {

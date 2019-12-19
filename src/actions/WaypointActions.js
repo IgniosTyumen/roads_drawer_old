@@ -1,29 +1,21 @@
 import {
-    SET_WAYPOINT_TEMPLATE,
-    SAVE_WAYPOINT_TEMPLATE,
-    CHANGE_WAYPOINT_STATUS,
-    CHANGE_WAYPOINT_COMMENT,
-    NEW_WAYPOINT_TEMPLATE,
-    CHANGE_CHECKPOINT_POSITION,
     ADD_CHECKPOINT_MARKER,
+    CHANGE_ALL_CHECKPOINTS,
+    CHANGE_CHECKPOINT_POSITION,
+    CHANGE_DISTRICT_OF_TEMPLATE_WAYPOINT,
+    CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT,
+    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
+    FINISH_WORK_WITH_ROAD,
     PUSH_CHECKPOINT_MARKER,
     PUSH_CHECKPOINT_MARKER_TO_START,
     REMOVE_CHECKPOINT_MARKER,
-    CHANGE_ALL_CHECKPOINTS,
-    SWAP_CHECKPOINTS_DIRECTION,
-    SAVE_DIRECTION,
-    CHANGE_NAME_OF_TEMPLATE_WAYPOINT,
-    CHANGE_DISTRICT_OF_TEMPLATE_WAYPOINT,
-    CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT
+    SET_WAYPOINT_TEMPLATE,
+    SWAP_CHECKPOINTS_DIRECTION
 } from '~/constants/WaypointsConstants'
-
-
-import {makeid} from "../utils/makeId";
 import React from "react";
 
 
 const waypointInitial = (userAuth) => {
-    debugger
     let importance='';
     if (userAuth.importanceRights.federal ) importance = 'Автомобильная дорога федерального значения';
     if (userAuth.importanceRights.regional ) importance = 'Автомобильная дорога регионального или межмуниципального значения';
@@ -186,5 +178,12 @@ export const changeImportanceOfTemplate = (importance) => dispatch => {
     dispatch({
         type:CHANGE_IMPORTANCE_OF_TEMPLATE_WAYPOINT,
         payload: importance
+    })
+}
+
+export const finishWorkWithRoad = () => dispatch => {
+    dispatch({
+        type:FINISH_WORK_WITH_ROAD,
+
     })
 }

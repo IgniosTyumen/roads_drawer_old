@@ -11,6 +11,7 @@ import RoadControlPanelContainer from "../RoadControlPanel/RoadControlPanelConta
 import {bridgesApi, dangersApi, roadsApi} from "../../api/api";
 import DangerRoadsPanelContainer from "../DangerRoadsPanel/DangerRoadsPanelContainer";
 import OrderControlPanelContainer from "../OrderControlPanel/OrderControlPanelContainer";
+import DrawAlgorithmPanelContainer from "../DrawAlgorithmPanel/DrawAlgorithmPanelContainer";
 
 const MainControlPanel = (props) => {
     const [openedPanel, setOpenedPanel] = useState('initClosedPanel');
@@ -106,6 +107,7 @@ const MainControlPanel = (props) => {
                     {mainGroupWindow==='roads' && <RoadControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                     {mainGroupWindow==='dangers' && <DangerRoadsPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                     {mainGroupWindow==='order' && <OrderControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='drawAlgorithm' && <DrawAlgorithmPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                 </div>
             }
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Popup} from "react-leaflet";
 import Button from "../ui/Button";
-import  { Spin, Icon } from 'antd';
+import {Icon, Spin} from 'antd';
 
 const RoadPopup = ({road, dispatch}) => {
 
@@ -58,6 +58,7 @@ const RoadPopup = ({road, dispatch}) => {
                 <p>Краткая информация:</p>
                 <p>ID дороги: {road.id}</p>
                 <p>Название дороги: {road.name}</p>
+                <a href={`https://av.admtyumen.ru/#/directory/roaddirectory/inst_id=${road.id}`} target='_blank' rel="noopener noreferrer" >Открыть в справочнике</a>
             </div>
             <div>
                 <p>Подробная информация:</p>

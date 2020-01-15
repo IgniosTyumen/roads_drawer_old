@@ -26,7 +26,6 @@ export default function activeOrders(state = initialState, action) {
             const newState = {...state};
             newState.activeRoad = {...newState.activeRoad}
             newState.activeRoad.segments_set = [...state.activeRoad.segments_set];
-            debugger
             const index = newState.activeRoad.segments_set.findIndex(element => element.id === action.payload.templateWaypoint.id);
             if (index === -1) {
                 newState.activeRoad.segments_set.push(action.payload.templateWaypoint)
@@ -35,8 +34,8 @@ export default function activeOrders(state = initialState, action) {
                 newState.activeRoad.segments_set[index] = action.payload.templateWaypoint;
                 newState.activeRoad.segments_set[index].line_path = getLinestringFromArray(action.payload.templateWaypoint.geometry.points);
             }
-            // newState.previewRoad = {...newState.activeRoad};
-            newState.previewRoad = undefined;
+            newState.previewRoad = {...newState.activeRoad};
+            // newState.previewRoad = undefined;
 
             return {...newState}
         }

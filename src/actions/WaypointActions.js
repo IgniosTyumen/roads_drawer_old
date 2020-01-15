@@ -12,6 +12,9 @@ import {
     SET_WAYPOINT_TEMPLATE,
     SWAP_CHECKPOINTS_DIRECTION
 } from '~/constants/WaypointsConstants'
+
+import {SWITCH_RESTRICTED_ROADS_SHOW, SWITCH_SHOW_EDIT_MARKERS} from '../constants/AppGlobalConstants'
+
 import React from "react";
 
 
@@ -64,6 +67,22 @@ export const selectWaypoint = (waypoint, orderId, waypointId) => dispatch => {
         orderId: orderId,
         waypointId: waypointId,
     })
+};
+
+export const toggleEditMarkersShow = () => dispatch => {
+    dispatch(
+        {
+            type:SWITCH_SHOW_EDIT_MARKERS
+        }
+    )
+};
+
+export const toggleRestrictedRoadsShow = () => dispatch => {
+    dispatch(
+        {
+            type:SWITCH_RESTRICTED_ROADS_SHOW
+        }
+    )
 };
 
 export const createWaypoint = (orderId, waypointId,user) => dispatch => {

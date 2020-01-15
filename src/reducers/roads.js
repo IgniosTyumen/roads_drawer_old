@@ -27,7 +27,6 @@ export default function road(state = initialState, action) {
             return newState;
         }
         case SAVE_DIRECTION: {
-            debugger
             let newState = {...state};
             const roadSearch = state.roads.find(element => element.id == action.payload.templateWaypoint.road_id);
             const stateIndex = state.roads.indexOf(roadSearch);

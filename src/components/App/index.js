@@ -1,13 +1,14 @@
 import React, {Fragment, useEffect} from 'react';
 import {connect, Provider} from 'react-redux';
 import Map from "~/components/Map";
-import MainControlPanelContainer from "../MainControlPanel/MainControlPanelContainer";
+import MainControlPanelContainer from "../Controls/MainControlPanel/MainControlPanelContainer";
 import * as AppActions from "~/actions/AppActions";
 import {bindActionCreators, compose} from "redux";
-import PreloaderContainer from "../Preloader/PreloaderContainer";
+import PreloaderContainer from "../CommonComponents/Preloader/PreloaderContainer";
 import {HashRouter, Route, withRouter} from "react-router-dom";
 import {store} from "~/store/configureStore";
-import DrawPanelContainer from "../DrawPanel/DrawPanelContainer";
+import DrawPanelContainer from "../Controls/DrawPanel/DrawPanelContainer";
+import SelectTyleLayerContainer from "../Controls/SelectTyleLayerContainer/SelectTyleLayerContainer";
 
 const App = ({appActions, isInitialized,...props}) => {
     useEffect(() => appActions.initApp(props), []);
@@ -25,6 +26,10 @@ const App = ({appActions, isInitialized,...props}) => {
                                {
                                    isInitialized
                                    && <DrawPanelContainer/>
+                               }
+                               {
+                                   isInitialized
+                                   && <SelectTyleLayerContainer/>
                                }
                                <Map style={{overflow: 'hidden'}}/>
                            </Fragment>
@@ -44,6 +49,10 @@ const App = ({appActions, isInitialized,...props}) => {
                                {
                                    isInitialized
                                    && <DrawPanelContainer/>
+                               }
+                               {
+                                   isInitialized
+                                   && <SelectTyleLayerContainer/>
                                }
                                <Map style={{overflow: 'hidden'}}/>
                            </Fragment>

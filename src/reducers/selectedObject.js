@@ -1,4 +1,5 @@
 import {SELECT_BRIDGE, SELECT_DANGER_ROAD, SELECT_ROAD, SELECT_SEGMENT} from '~/constants/SelectConstants'
+import {SAVE_DIRECTION,} from '~/constants/WaypointsConstants'
 
 const initialState = {
     selectedRoad: undefined,
@@ -27,6 +28,8 @@ export default function selectedObject(state = initialState, action) {
             return {
                 selectedSegment: action.payload
             };
+        case SAVE_DIRECTION:
+            return {...initialState}
         default:
             return state;
     }

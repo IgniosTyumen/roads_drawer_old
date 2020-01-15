@@ -1,13 +1,22 @@
-import {GEOMETRY_WIGHT, SET_CENTER, SET_CENTER_AND_ZOOM, SET_VIEWPORT_COORDINATES, SET_ZOOM} from "~/constants/Map";
+import {
+    GEOMETRY_WIGHT,
+    SELECTED_TILE_LAYER_LINK,
+    SET_CENTER,
+    SET_CENTER_AND_ZOOM,
+    SET_VIEWPORT_COORDINATES,
+    SET_ZOOM
+} from "~/constants/Map";
 
 import {
-  DISABLE_ADD_MARKER_MODE,
-  ENABLE_ADD_MARKER_MODE,
-  SET_DRAW_ALGORITHM,
-  SET_ROADS_TYPE_FILTER,
-  SWITCH_ADD_MARKER_MODE,
-  SWITCH_PULL_MARKER_MODE
-} from "~/constants/AppGlobalConstants";
+    DISABLE_ADD_MARKER_MODE,
+    ENABLE_ADD_MARKER_MODE,
+    SET_DRAW_ALGORITHM,
+    SET_ROADS_TYPE_FILTER,
+    SWITCH_ADD_MARKER_MODE,
+    SWITCH_PULL_MARKER_MODE,
+    SWITCH_RESTRICTED_ROADS_SHOW,
+    SWITCH_SHOW_EDIT_MARKERS,
+} from "../constants/AppGlobalConstants";
 
 const initialState = {
   center: [57.144075, 65.5579277777778],
@@ -18,7 +27,9 @@ const initialState = {
   editMode: false,
   pullMode: false,
   drawAlgorithm: 'roadpath',
-  visibleRoads: ['municipal','regional','federal', 'unknown']
+  visibleRoads: ['municipal','regional','federal', 'unknown'],
+  showEditMarkers : true,
+  showRestrictedRoads: true
 }
 
 export default function map(state = initialState, action) {
@@ -27,6 +38,21 @@ export default function map(state = initialState, action) {
       return {
         ...state,
         center: action.payload
+      }
+    case SWITCH_SHOW_EDIT_MARKERS:
+      return {
+        ...state,
+        showEditMarkers: !state.showEditMarkers
+      }
+    case SWITCH_RESTRICTED_ROADS_SHOW:
+      return {
+        ...state,
+        showRestrictedRoads: !state.showRestrictedRoads
+      }
+    case SELECTED_TILE_LAYER_LINK:
+      return {
+        ...state,
+        tile: action.payload
       }
       case SET_CENTER_AND_ZOOM:
       return {

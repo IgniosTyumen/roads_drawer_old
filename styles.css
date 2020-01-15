@@ -3,7 +3,7 @@
 .mainControlPanel{
     z-index: 1800;
     position: absolute;
-    width: 566px;
+    width: 710px;
     height: fit-content;
     max-height: 100vh;
     top:0;
@@ -43,13 +43,13 @@
 .closedMainControlPanel{
     animation-duration: 0.75s;
     animation-name: sliderOutFromRightMain;
-    left: -566px;
+    left: -710px;
 }
 
 
 @keyframes sliderFromRightMain {
     from {
-        left: -566px;
+        left: -710px;
     }
     to {
         left: 0px;
@@ -60,7 +60,7 @@
         left: 0px;
     }
     to {
-        left: -566px;
+        left: -710px;
     }
 }
 
@@ -95,7 +95,7 @@
 }
 
 .initClosedPanel{
-    left:-566px
+    left:-710px
 }
 
 .MuiSelect-select{
@@ -239,10 +239,10 @@
 }
 
 .mainGroupWindow.closed {
-    width: 566px;
+    width: 710px;
     height: fit-content;
     z-index: 1400;
-    /*top: -566px;*/
+    /*top: -710px;*/
     transform: rotateX(-90deg);
     transition: transform 0.3s linear;
 
@@ -299,7 +299,7 @@
 }
 
 .mainGroupPanel {
-    width: 566px;
+    width: 710px;
 }
 
 .detailsObjectPanel {
@@ -309,7 +309,7 @@
     height: 89vh;
     position: absolute;
     top: 103px;
-    left: 566px;
+    left: 710px;
     padding: 5px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -318,6 +318,8 @@
 
 .mainGroupPanelTitle{
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .MuiTableRow-root:hover{
@@ -451,7 +453,7 @@
 .drawPanel{
     position: absolute;
     top: 15px;
-    width: 238px;
+    width: fit-content;
     height: 42px;
     left: 50%;
     transform: translateX(-50%);
@@ -468,7 +470,7 @@
 
 .drawPanelMessageBox{
     position: absolute;
-    top: 40px;
+    top: 55px;
     width: auto;
     height: auto;
     left: 50%;
@@ -540,4 +542,34 @@
 
 .calendar{
     z-index: 2500;
+}
+
+.ant-dropdown{
+    z-index: 2500;
+}
+
+
+
+.ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-filters {
+     padding-right: 0 !important;
+}
+
+.ant-popover{
+    z-index: 2500 !important;
+}
+
+.tileSelector{
+    position: absolute;
+    z-index: 2500;
+    right: 10px;
+    top: 60px;
+    width: fit-content;
+}
+
+.leaflet-popup-content p{
+    margin: 15px 0 0;
+}
+
+.panelSummaryDecoratorActions{
+    display: flex;
 }

@@ -1,19 +1,19 @@
 import {
-    INITIALIZE_APP,
-    INITIALIZE_SUCCESS,
+    INITIALISATION_STARTS,
     INITIALIZE_FAILURE,
-    SET_ROADS_TO_DOWNLOAD,
-    SET_ROADS_DOWNLOADED,
-    SET_SIGNS_TO_DOWNLOAD,
-    SET_SIGNS_DOWNLOADED,
-    SET_BRIDGES_TO_DOWNLOAD,
-    SET_BRIDGES_DOWNLOADED,
+    INITIALIZE_SUCCESS,
+    ITERATE_BRIDGES_DOWNLOADED,
     ITERATE_ROADS_DOWNLOADED,
     ITERATE_SIGNS_DOWNLOADED,
-    ITERATE_BRIDGES_DOWNLOADED,
+    SET_BRIDGES_DOWNLOADED,
+    SET_BRIDGES_TO_DOWNLOAD,
+    SET_DANGERS_DOWNLOADED,
     SET_DANGERS_TO_DOWNLOAD,
-    SET_DANGERS_DOWNLOADED
-} from "~/constants/AppGlobalConstants";
+    SET_ROADS_DOWNLOADED,
+    SET_ROADS_TO_DOWNLOAD,
+    SET_SIGNS_DOWNLOADED,
+    SET_SIGNS_TO_DOWNLOAD
+} from "../constants/AppGlobalConstants";
 
 const initialState = {
     isInitialized: false,
@@ -33,6 +33,16 @@ export default function initial(state = initialState, action) {
             return {
                 ...state,
                 isInitialized:true,
+            };
+        case INITIALISATION_STARTS:
+            return {
+                ...state,
+                isInitialized:undefined,
+            };
+        case INITIALIZE_FAILURE:
+            return {
+                ...state,
+                isInitialized:false,
             };
         case SET_ROADS_TO_DOWNLOAD:
             return {

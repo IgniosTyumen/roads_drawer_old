@@ -1,10 +1,11 @@
 import {
-  SET_CENTER,
-  GEOMETRY_WIGHT,
-  SET_VIEWPORT_COORDINATES,
-    SET_ZOOM,
-  SET_CENTER_AND_ZOOM
-} from "~/constants/Map";
+    GEOMETRY_WIGHT,
+    SELECTED_TILE_LAYER_LINK,
+    SET_CENTER,
+    SET_CENTER_AND_ZOOM,
+    SET_VIEWPORT_COORDINATES,
+    SET_ZOOM
+} from "../constants/Map";
 
 export function setCenter(latlng) {
   return {
@@ -43,3 +44,9 @@ export function setCenterAndZoom(latlng, zoom=14) {
   }
 }
 
+export function selectTileLayer(url) {
+  return {
+    type: SELECTED_TILE_LAYER_LINK,
+    payload: url,
+  }
+}

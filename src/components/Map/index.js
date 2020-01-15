@@ -5,14 +5,15 @@ import * as mapActions from "~/actions/MapActions";
 import * as waypointActions from "~/actions/WaypointActions";
 import * as appActions from "~/actions/AppActions";
 import {LayersControl, Map as LeafletMap, TileLayer, withLeaflet} from 'react-leaflet';
-import RoadsLayerContainer from "../RoadsLayer/RoadsLayerContainer";
-import BridgesLayerContainer from "../BridgesLayer/BridgesLayerContainer";
-import SignsLayerContainer from "../SignsLayer/SignsLayerContainer";
-import DangerRoadsLayerContainer from "../DangerRoadsLayer/DangerRoadsLayerContainer";
-import SelectedObjectContainer from "../SelectedObject/SelectedObjectContainer";
+import RoadsLayerContainer from "../StaticLayers/Roads/RoadsLayer/RoadsLayerContainer";
+import SignsLayerContainer from "../StaticLayers/Signs/SignsLayer/SignsLayerContainer";
+import DangerRoadsLayerContainer from "../StaticLayers/DangerRoads/DangerRoadsLayer/DangerRoadsLayerContainer";
+import SelectedObjectContainer from "../EditableLayers/SelectedObject/SelectedObjectContainer";
 import PrintControlDefault from 'react-leaflet-easyprint';
-import WaypointTemplateLayerContainer from "../WaypointTemplateLayer/WaypointTemplateLayerContainer";
-import ActiveRoadPreviewLayerContainer from "../ActiveRoadPreviewLayer/ActiveRoadPreviewLayerContainer";
+import WaypointTemplateLayerContainer from "../EditableLayers/WaypointTemplateLayer/WaypointTemplateLayerContainer";
+import ActiveRoadPreviewLayerContainer
+    from "../StaticLayers/ActiveRoad/ActiveRoadPreviewLayer/ActiveRoadPreviewLayerContainer";
+import styleProvider from "../CommonComponents/StyleProvider/styleProvider";
 
 
 class Map extends React.Component {
@@ -38,7 +39,7 @@ class Map extends React.Component {
     }
 
     render() {
-        const {center, zoom} = this.props.map;
+        const {center, zoom,tile} = this.props.map;
         const {userPreferences} = this.props;
         const PrintControl = withLeaflet(PrintControlDefault);
         const {BaseLayer, Overlay} = LayersControl;
@@ -61,16 +62,14 @@ class Map extends React.Component {
 
             >
                 <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url={tile}
                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                 />
 
                 <RoadsLayerContainer/>
-                <BridgesLayerContainer/>
-                {(zoom>=userPreferences.zoomMinSignsRender && zoom<=userPreferences.zoomMaxSignsRender)  && <SignsLayerContainer/>}
+                {(zoom>=styleProvider(userPreferences,'signs','signsZoomFrom') && zoom<=styleProvider(userPreferences,'signs','signsZoomTo'))  && <SignsLayerContainer/>}
                 <DangerRoadsLayerContainer/>
                 <SelectedObjectContainer/>
-                {/*<OrderPreviewLayerContainer/>*/}
                 <ActiveRoadPreviewLayerContainer/>
 
                 <WaypointTemplateLayerContainer/>

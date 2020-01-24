@@ -3,7 +3,7 @@ import {Button, Icon, Input, Table} from "antd";
 import Highlighter from "react-highlight-words";
 import {VTComponents, VTScroll} from "virtualizedtableforantd";
 
-const ctx = { top: 0 };
+const ctx = {top: 0};
 
 // class VirtualizedTable extends React.Component {
 class VirtualizedTable extends PureComponent {
@@ -47,11 +47,19 @@ class VirtualizedTable extends PureComponent {
         filterIcon: filtered => (
             <Icon type="search" style={{color: filtered ? '#1890ff' : undefined}} title={"Поиск"}/>
         ),
-        onFilter: (value, record) =>
-            record[dataIndex]? record[dataIndex]
+        onFilter: (value, record) => {
+            if (typeof (record[dataIndex]) === "boolean"){
+                if (value.toLowerCase().includes('д')){
+                    return record[dataIndex]
+                } else {
+                    return !record[dataIndex]
+                }
+            } else
+            return record[dataIndex] ? record[dataIndex]
                 .toString()
                 .toLowerCase()
-                .includes(value.toLowerCase()) : false,
+                .includes(value.toLowerCase()) : false
+        },
 
 
         onFilterDropdownVisibleChange: visible => {
@@ -85,19 +93,19 @@ class VirtualizedTable extends PureComponent {
         this.setState({searchText: ''});
     };
 
-    handleResize = index => (e, { size }) => {
-        this.setState(({ columns }) => {
+    handleResize = index => (e, {size}) => {
+        this.setState(({columns}) => {
             const nextColumns = [...columns];
             nextColumns[index] = {
                 ...nextColumns[index],
                 width: size.width,
             };
-            return { columns: nextColumns };
+            return {columns: nextColumns};
         });
     };
 
     componentDidMount() {
-        VTScroll(this.props.virtualId, { top: ctx.top });
+        VTScroll(this.props.virtualId, {top: ctx.top});
     }
 
     componentWillUnmount() {
@@ -105,72 +113,84 @@ class VirtualizedTable extends PureComponent {
     }
 
     render() {
-        const alphabeticalSorter = (a, b) => {
-            if (a.name && b.name) {
-                const  A = a.name.toUpperCase();
-                const  B = b.name.toUpperCase();
-                if (A<B) return -1;
-                if (A>B) return 1;
+        const alphabeticalSorter = (a, b, field) => {
+            if (a[field] && b[field]) {
+                const A = a[field].toUpperCase();
+                const B = b[field].toUpperCase();
+                if (A < B) return -1;
+                if (A > B) return 1;
                 return 0;
-            } else if (a.name) {
+            } else if (a[field]) {
                 return 1
-            } else if (b.name) {
+            } else if (b[field]) {
                 return -1
-            } else  return -1
+            } else return -1
         };
 
-        const numericSorter =  (a, b) => {
-            if (typeof (a.start_road) === 'number' && typeof (b.start_road) === 'number') {
-                return a.start_road - b.start_road
-            } else if (typeof (a.start_road) === 'number') {
+        const numericSorter = (a, b, field) => {
+            if (typeof (a[field]) === 'number' && typeof (b[field]) === 'number') {
+                return a[field] - b[field]
+            } else if (typeof (a[field]) === 'number') {
                 return 1
-            } else if (typeof (b.start_road) === 'number') {
+            } else if (typeof (b[field]) === 'number') {
                 return -1
-            } else  return -1
+            } else return -1
         };
 
         let columns = [];
-        for (let it=0; it<this.props.columns.length; it++) {
+        for (let it = 0; it < this.props.columns.length; it++) {
             const propsObj = this.props.columns[it];
-            const newColumn = {
+            let renderCallback = propsObj.customRenderer;
+
+            let newColumn = {
                 title: propsObj.title,
                 dataIndex: propsObj.key,
-                width : propsObj.width,
-                sorter: propsObj.type==='number' ? numericSorter : alphabeticalSorter,
+                width: propsObj.width,
+                sorter: propsObj.type === 'number' ? (a, b) => numericSorter(a, b, propsObj.key) : propsObj.type === 'string' ? (a, b) => alphabeticalSorter(a, b, propsObj.key) : null,
                 ...this.getColumnSearchProps(propsObj.key),
             };
+            if (renderCallback) {
+                newColumn.render = (text, record) => renderCallback(text, record)
+            }
             columns.push(newColumn)
         }
         const dataSource = this.props.data;
         return (
-        <Fragment>
-        <Table
-            columns={columns}
-            dataSource={dataSource}
-            scroll={{ y: '79vh' }}
-            size="small"
-            pagination={false}
-            width='auto'
-            rowKey={record => record.id}
-            onRow={(record, rowIndex) => {
-                return {
-                    onClick: this.props.onRowClick ?  () =>this.props.onRowClick(record) : null, // click row
-                    onDoubleClick: this.props.onRowDoubleClick ? () =>this.props.onRowDoubleClick(record) : null, // double click row
-                    onContextMenu: this.props.onRowRightClick ? () =>this.props.onRowRightClick(record) : null, // right button click row
-                    onMouseEnter:  this.props.onRowMouseEnter ? () =>this.props.onRowMouseEnter(record) : null, // mouse enter row
-                    onMouseLeave:  this.props.onRowMouseLeave ? () =>this.props.onRowMouseLeave(record) : null, // mouse leave row
-                };
-            }}
-            components={
-                VTComponents({
-                    id: this.props.virtualId,
-                    onScroll: ({ left, top }) => ctx.top = top
+            <Fragment>
+                <Table
+                    columns={columns}
+                    dataSource={dataSource}
+                    scroll={{y: this.props.height || '79vh'}}
+                    size="small"
+                    pagination={false}
+                    width='auto'
+                    rowKey={record => record.id}
+                    onRow={(record, rowIndex) => {
+                        return {
+                            onClick: this.props.onRowClick ? () => this.props.onRowClick(record) : null, // click row
+                            onDoubleClick: this.props.onRowDoubleClick ? () => this.props.onRowDoubleClick(record) : null, // double click row
+                            onContextMenu: this.props.onRowRightClick ? () => this.props.onRowRightClick(record) : null, // right button click row
+                            onMouseEnter: this.props.onRowMouseEnter ? () => this.props.onRowMouseEnter(record) : null, // mouse enter row
+                            onMouseLeave: this.props.onRowMouseLeave ? () => this.props.onRowMouseLeave(record) : null, // mouse leave row
+                        };
+                    }}
+                    components={
+                        VTComponents({
+                            id: this.props.virtualId,
+                            onScroll: ({left, top}) => ctx.top = top
 
-                })
-            }
-        />
-        </Fragment>
-        )}
+                        })
+                    }
+                    onChange={(a, b, c, actualData) => {
+                        this.props.containerCallback ?
+                            this.props.containerCallback(actualData.currentDataSource)
+                            :
+                            null
+                    }}
+                />
+            </Fragment>
+        )
+    }
 }
 
 export default VirtualizedTable;

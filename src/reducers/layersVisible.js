@@ -1,8 +1,4 @@
-import {
-    SET_LAYER_VISIBLE,
-    SET_LAYER_INVISIBLE,
-    SET_ALL_LAYERS_VISIBLE,
-} from '~/constants/LayersFilter'
+import {SET_ALL_LAYERS_VISIBLE, SET_LAYER_INVISIBLE, SET_LAYER_VISIBLE,} from '../constants/LayersFilter'
 
 const initialState = {
     invisibleList: []

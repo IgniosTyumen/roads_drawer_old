@@ -4,17 +4,15 @@ import {
     SET_ROADS_DOWNLOADED,
     SET_ROADS_TO_DOWNLOAD,
     SET_SEGMENTS_DOWNLOADED
-} from "~/constants/AppGlobalConstants";
+} from "../constants/AppGlobalConstants";
 
-import {SET_ALL_USER_PREFERENCES,} from '~/constants/UserSettingsConstants'
+import {SET_ALL_USER_PREFERENCES,} from '../constants/UserSettingsConstants'
 
-import {SET_ROADS} from "~/constants/RoadsConstants";
-
-import {SAVE_SCHEMA,} from "~/constants/SchemaConstants"
+import {SET_ROADS} from "../constants/RoadsConstants";
 
 
 import {all, call, put, takeEvery} from 'redux-saga/effects'
-import {dangersApi, dictionariesApi, roadsApi, schemaApi, userApi} from "../api/api";
+import {airfieldsApi, dangersApi, dictionariesApi, medicalOrganizationApi, roadsApi, userApi} from "../api/api";
 import {initialState} from "../reducers/userPreferences";
 
 let counterRoadsDownloaded = 0;
@@ -65,7 +63,6 @@ const applyModifierForSegment = (segmentList, parameter) => {
     }
 
     return newList
-
 }
 
 
@@ -82,6 +79,15 @@ function* uploadSegments(page) {
     counterSegmentsDownloaded++;
     yield put({type: SET_SEGMENTS_DOWNLOADED, payload: counterSegmentsDownloaded});
     return responseSegments.data;
+}
+
+function* uploadAirfields() {
+    const airfieldsResponse = yield call(() => airfieldsApi.getAllAirfields());
+    return airfieldsResponse;
+}
+function* uploadMedicalOrganizations() {
+    const medicalsResponse = yield call(() => medicalOrganizationApi.getAllMedicalOrganizations());
+    return medicalsResponse;
 }
 
 function* uploadDangerRoads(page) {
@@ -171,6 +177,7 @@ function* initialize(action) {
 
         let dangers = [];
         const dangersResponse = yield call (()=>uploadDangerRoads(1))
+
         const order = yield call (()=>uploadOrder())
         const dictionaries = yield call(uploadDictionaries);
 
@@ -184,7 +191,6 @@ function* initialize(action) {
         let sagasDangers = [];
 
         for (let page = 2; page <= totalPagesDangers; page++) {
-        // for (let page = 2; page <= 3; page++) {
             sagasDangers.push(call(() => uploadDangerRoads(page)));
         }
 
@@ -195,8 +201,14 @@ function* initialize(action) {
         const sagasSegments = [];
         sagasSegments.push(call(() => uploadSegments()));
 
+        const sagasAirfields = [];
+        sagasAirfields.push(call(() => uploadAirfields()));
 
-        const [allRoads,allSegments,otherDangers] = yield all([all(sagasRoads) , all (sagasSegments),all(sagasDangers)]);
+        const sagasMedical = [];
+        sagasMedical.push(call(()=>uploadMedicalOrganizations()))
+
+
+        const [allRoads,allSegments,otherDangers, allAirfields,allMedicals] = yield all([all(sagasRoads) , all (sagasSegments),all(sagasDangers), all(sagasAirfields),all(sagasMedical)]);
 
         let modifiedSegments = [];
         for (let it in allSegments[0].params){
@@ -214,14 +226,25 @@ function* initialize(action) {
             }
         }
 
-        const schemaResponse = yield call(()=>schemaApi.getSchema());
-
-        yield put({
-            type:SAVE_SCHEMA,
-            payload: schemaResponse.data
-        })
-
-
+        const airfields = allAirfields[0].data.objects;
+        const fap = allMedicals[0].data.objects.filter(el=>
+           el.mo_type=='Фельдшерско-акушерский пункт'
+        );
+        let ambulance = allMedicals[0].data.objects.filter(el=>el.mo_type!=='Фельдшерско-акушерский пункт');
+        // yield put(
+        //     {
+        //         type: SET_ROADS,
+        //         roads: roads,
+        //         bridges: [],
+        //         roadsigns: [],
+        //         dangers: dangers,
+        //         airfields:airfields,
+        //         // cities:dictionaries.cities.filter(el=>el.is_faraway)
+        //         cities:dictionaries.cities,
+        //         fap,
+        //         ambulance
+        //     }
+        // );
         yield put(
             {
                 type: SET_ROADS,
@@ -229,20 +252,29 @@ function* initialize(action) {
                 bridges: [],
                 roadsigns: [],
                 dangers: dangers,
+                airfields:[],
+                // cities:dictionaries.cities.filter(el=>el.is_faraway)
+                cities:[],
+                fap:[],
+                ambulance:[]
             }
         );
 
         const roadNumberPrepared = action.url;
         if (roadNumberPrepared) {
             const road = roads.find(element=>element.id==roadNumberPrepared)
-            yield  put( {
-                type: 'SET_ROAD_ACTIVE',
-                payload: road
-            })
-            yield put( {
-                type: 'SET_ROAD_ACTIVE_PREVIEW',
-                payload: road
-            })
+            if (road.line_path || road.segments_set) {
+                yield  put({
+                    type: 'SET_ROAD_ACTIVE',
+                    payload: road
+                })
+                yield put({
+                    type: 'SET_ROAD_ACTIVE_PREVIEW',
+                    payload: road
+                })
+            } else {
+                alert('В выбранной дороге отсутсвуют участки, работа с дорогой невозможна. Внесите участки')
+            }
         }
 
 
@@ -252,12 +284,45 @@ function* initialize(action) {
             }
         );
     } catch (e) {
+        console.log(e)
         yield put({type: INITIALIZE_FAILURE})
-        // console.warn(e)
-        // yield put({type:'INITIALIZE_APP'})
+
     }
 
 }
+//parser starter
+// function* initialize(action) {
+//     let result = []
+//     const responseLayers = yield call(() => parser.getAllTypes());
+//     const layers = responseLayers.data;
+//     result.push({layers});
+//     debugger
+//     for (let it=0;it<layers.length;it++){
+//         if (layers[it].type==='layer' || layers[it].type==='virtual'){
+//             const dataStructure = yield call(() => parser.getStructure(layers[it].code));
+//             let params = []
+//             for (let parIt = 0; parIt< dataStructure.data.length; parIt++){
+//                 params.push(dataStructure.data[parIt].code)
+//             }
+//             const dataIdListResponse = yield call(() => parser.getDataList(layers[it].code));
+//             const dataIdList = dataIdListResponse.data;
+//             let data = []
+//             for (let dataIt=0; dataIt< dataIdList.length ;dataIt++){
+//                 const dataFullListResponse = yield call(() => parser.getData(layers[it].code,dataIdList[dataIt]['id']));
+//                 data.push(dataFullListResponse.data)
+//             }
+//             result.push({
+//                 [layers[it].code] : data
+//             })
+//             const dataFullListResponse = yield call(() => parser.save({
+//                 [layers[it].code] : data
+//             },layers[it].code));
+//         }
+//
+//     }
+//     // const dataFullListResponse = yield call(() => parser.save(result));
+//     // const data = yield call(() => parser.getAllTypes(layers,layers))
+// }
 
 export function* watchInitializeMixed() {
     yield takeEvery('INITIALIZE_APP', initialize)

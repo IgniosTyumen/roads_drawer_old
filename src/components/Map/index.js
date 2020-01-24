@@ -1,19 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as mapActions from "~/actions/MapActions";
-import * as waypointActions from "~/actions/WaypointActions";
-import * as appActions from "~/actions/AppActions";
+import * as mapActions from "../../actions/MapActions";
+import * as waypointActions from "../../actions/WaypointActions";
+import * as appActions from "../../actions/AppActions";
 import {LayersControl, Map as LeafletMap, TileLayer, withLeaflet} from 'react-leaflet';
 import RoadsLayerContainer from "../StaticLayers/Roads/RoadsLayer/RoadsLayerContainer";
-import SignsLayerContainer from "../StaticLayers/Signs/SignsLayer/SignsLayerContainer";
 import DangerRoadsLayerContainer from "../StaticLayers/DangerRoads/DangerRoadsLayer/DangerRoadsLayerContainer";
 import SelectedObjectContainer from "../EditableLayers/SelectedObject/SelectedObjectContainer";
 import PrintControlDefault from 'react-leaflet-easyprint';
 import WaypointTemplateLayerContainer from "../EditableLayers/WaypointTemplateLayer/WaypointTemplateLayerContainer";
 import ActiveRoadPreviewLayerContainer
     from "../StaticLayers/ActiveRoad/ActiveRoadPreviewLayer/ActiveRoadPreviewLayerContainer";
-import styleProvider from "../CommonComponents/StyleProvider/styleProvider";
+import AirfieldsLayerContainer from "../StaticLayers/Airfields/AirfieldsLayer/AirfieldsLayerContainer";
+import CitiesLayerContainer from "../StaticLayers/Cities/CitiesLayer/CitiesLayerContainer";
+import FAPLayerContainer from "../StaticLayers/FAP/FAPLayer/FAPLayerContainer";
+import AmbulanceLayerContainer from "../StaticLayers/Ambulance/AmbulanceLayer/AmbulanceLayerContainer";
 
 
 class Map extends React.Component {
@@ -22,7 +24,12 @@ class Map extends React.Component {
     }
 
     handleViewportChange(value) {
-        this.props.mapActions.setCenterAndZoomChange(value.center, value.zoom)
+
+        const map = this.map && this.map.leafletElement ? this.map.leafletElement : null;
+        const bounds = map ? map.getBounds() : null
+        if (bounds){
+            this.props.mapActions.setCenterAndZoomChange(value.center, value.zoom,bounds)
+        }
     }
 
     handleZoomChange(value) {
@@ -52,6 +59,7 @@ class Map extends React.Component {
                 viewport={{center, zoom}}
                 preferCanvas={true}
                 draggable={false}
+                maxZoom={20}
                 onViewportChanged={this.handleViewportChange.bind(this)}
                 disableDoubleClickZoom={true}
                 onContextMenu={(event) => {
@@ -67,12 +75,15 @@ class Map extends React.Component {
                 />
 
                 <RoadsLayerContainer/>
-                {(zoom>=styleProvider(userPreferences,'signs','signsZoomFrom') && zoom<=styleProvider(userPreferences,'signs','signsZoomTo'))  && <SignsLayerContainer/>}
+                {/*{(zoom>=styleProvider(userPreferences,'signs','signsZoomFrom') && zoom<=styleProvider(userPreferences,'signs','signsZoomTo'))  && <SignsLayerContainer/>}*/}
                 <DangerRoadsLayerContainer/>
                 <SelectedObjectContainer/>
                 <ActiveRoadPreviewLayerContainer/>
-
+                <AirfieldsLayerContainer/>
+                <CitiesLayerContainer/>
                 <WaypointTemplateLayerContainer/>
+                <FAPLayerContainer/>
+                <AmbulanceLayerContainer/>
 
                 <PrintControl ref={(ref) => {
                     this.printControl = ref;

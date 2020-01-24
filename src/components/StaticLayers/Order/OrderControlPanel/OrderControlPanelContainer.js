@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import OrderControlPanel from "./OrderControlPanel";
-import * as waypointActions from '~/actions/WaypointActions'
-import * as mapActions from '~/actions/MapActions'
+import * as waypointActions from '../../../../actions/WaypointActions'
+import * as mapActions from '../../../../actions/MapActions'
 import {bindActionCreators} from "redux";
 
 const OrderControlPanelContainer = props => {

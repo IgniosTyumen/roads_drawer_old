@@ -3,13 +3,14 @@ import {connect} from "react-redux";
 import RoadControlPanel from "./RoadControlPanel";
 import getPointsArrayFromLinestring from "../../../../utils/getPointsArrayFromLinestring";
 import {bindActionCreators} from "redux";
-import * as mapActions from "~/actions/MapActions";
-import * as selectObjectsActions from "~/actions/SelectObjectsActions";
+import * as mapActions from "../../../../actions/MapActions";
+import * as selectObjectsActions from "../../../../actions/SelectObjectsActions";
 import * as newRoadActions from "../../../../actions/NewRoadActions";
 import ActiveRoadPanelContainer from "../../ActiveRoad/ActiveRoadPanel/ActiveRoadPanelContainer";
+import * as objectActions from "../../../../actions/ObjectActions";
 
 
-const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapActions, selectObjectsActions,newRoadActions,activeRoad, userAuth}) => {
+const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapActions, selectObjectsActions,newRoadActions,activeRoad, userAuth,objectActions}) => {
 
 
 
@@ -20,6 +21,10 @@ const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapAction
         }
 
 
+    }
+
+    const containerCallback = (data) => {
+        objectActions.addReducerValue('roads','filtered',data)
     }
 
 
@@ -36,7 +41,7 @@ const RoadControlPanelContainer = ({roads, handleSelectDetailedObject, mapAction
             roads={roads}
             handleSelectDetailedObject={handleSelectDetailedObject}
             moveMapToObject={moveMapToObject}
-            containerCallbacks={containerCallbacks}
+            containerCallback={containerCallback}
             userAuth={userAuth}
         />}
             {activeRoad &&
@@ -60,7 +65,8 @@ const mapDispatchToProps = dispatch => {
     return {
         mapActions: bindActionCreators(mapActions,dispatch),
         selectObjectsActions: bindActionCreators(selectObjectsActions,dispatch),
-        newRoadActions: bindActionCreators(newRoadActions,dispatch)
+        newRoadActions: bindActionCreators(newRoadActions,dispatch),
+        objectActions: bindActionCreators(objectActions,dispatch)
 
     }
 };

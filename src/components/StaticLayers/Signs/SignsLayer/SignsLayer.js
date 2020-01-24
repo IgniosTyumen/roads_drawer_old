@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {Marker} from "react-leaflet";
-import {provideSVGSign} from "~/utils/SignsSVGCollection"
+import {provideSVGSign} from "../../../../utils/SignsSVGCollection"
 
 const SignsLayer = (props) => {
 

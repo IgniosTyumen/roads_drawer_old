@@ -8,11 +8,12 @@ import {
     SWITCH_PULL_MARKER_MODE
 } from "../constants/AppGlobalConstants";
 
-export const initApp = (props) => (dispatch) => {
+export const initApp = (props,nonLoaded) => (dispatch) => {
     dispatch(
         {
             type: INITIALIZE_APP,
-            url:props.location.pathname.replace('/','')
+            url:props.location.pathname.replace('/',''),
+            nonLoaded
         }
     );
 };

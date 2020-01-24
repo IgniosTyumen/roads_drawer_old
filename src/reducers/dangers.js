@@ -1,6 +1,4 @@
-import {
-    SET_ROADS
-} from '~/constants/RoadsConstants'
+import {SET_ROADS} from '../constants/RoadsConstants'
 
 const initialState = {
     dangers: undefined

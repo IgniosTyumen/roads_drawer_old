@@ -13,7 +13,7 @@ import {
     SAVE_DIRECTION,
     SET_WAYPOINT_TEMPLATE,
     SWAP_CHECKPOINTS_DIRECTION
-} from '~/constants/WaypointsConstants'
+} from '../constants/WaypointsConstants'
 import getPointsArrayFromLinestring from "../utils/getPointsArrayFromLinestring";
 
 const initialState = {

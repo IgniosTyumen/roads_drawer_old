@@ -3,11 +3,12 @@ import VirtualizedTable from "../../../CommonComponents/VirtualizedTable/Virtual
 
 
 const RoadControlPanel = (props) => {
-    const {roads, handleSelectDetailedObject, moveMapToObject, containerCallbacks} = props;
+    const {roads, handleSelectDetailedObject, moveMapToObject, containerCallback} = props;
 
     const onRowClick = (target) => {
         moveMapToObject(target);
-        handleSelectDetailedObject(target, 'road')
+        const findRoad = roads.roads.find(el=>el.id===target.id)
+        handleSelectDetailedObject(findRoad, 'road')
     };
 
     const columns = [
@@ -58,6 +59,7 @@ const RoadControlPanel = (props) => {
                     columns={columns}
                     onRowClick={onRowClick}
                     virtualId='roads'
+                    containerCallback={containerCallback}
                 />
             </div>
         </div>

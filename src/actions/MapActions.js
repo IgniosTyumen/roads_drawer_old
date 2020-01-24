@@ -14,11 +14,12 @@ export function setCenter(latlng) {
   }
 }
 
-export function setCenterAndZoomChange(latlng,zoom) {
+export function setCenterAndZoomChange(latlng,zoom,bounds) {
   return {
     type: SET_CENTER_AND_ZOOM,
     center: latlng,
-    zoom: zoom
+    zoom: zoom,
+    bounds
   }
 }
 

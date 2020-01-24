@@ -1,9 +1,7 @@
-
-
-require("babel-core/register");
-require("babel-polyfill");
+// require("babel-core/register");
+// require("babel-polyfill");
 import React from 'react';
-import { render } from 'react-dom';
+import {render} from 'react-dom';
 
 import './assets/css/global.css';
 

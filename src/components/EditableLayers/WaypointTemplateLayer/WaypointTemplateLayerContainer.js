@@ -1,8 +1,8 @@
 import React, {Fragment} from "react";
 import {connect} from "react-redux";
 import WaypointTemplateLayer from "./WaypointTemplateLayer";
-import * as waypointActions from '~/actions/WaypointActions'
-import * as appActions from '~/actions/AppActions'
+import * as waypointActions from '../../../actions/WaypointActions'
+import * as appActions from '../../../actions/AppActions'
 import {bindActionCreators} from "redux";
 
 const WaypointTemplateLayerContainer = ({waypointTemplate, waypointActions, appActions,visibleList, userPreferences,map}) => {

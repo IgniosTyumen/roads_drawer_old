@@ -21,10 +21,34 @@ module.exports = {
     rules: [
       {
         test: /\.js/,
+        include: [
+          path.resolve(__dirname, 'src')
+        ],
         exclude: /node_modules/,
-        use: {
+        use: [{
           loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            babelrc: false,
+            presets: [
+              ["@babel/env", {
+                "targets": {
+                  'browsers': ['Chrome >=59']
+                },
+                "modules":false,
+                "loose":true
+              }],"@babel/react"],
+
+            plugins: [
+              "react-hot-loader/babel",
+              "@babel/plugin-proposal-class-properties",
+              ["import", {libraryName: "antd", style: "css"}],
+              "@babel/proposal-object-rest-spread"
+
+            ]
+          }
         }
+        ]
       },
       {
         test: LIB_STYLES,

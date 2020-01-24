@@ -1,6 +1,4 @@
-import {
-    SET_VISIBLE_SIGNS_LIST
-} from '~/constants/SignsVisibleListConstants'
+import {SET_VISIBLE_SIGNS_LIST} from '../constants/SignsVisibleListConstants'
 
 const initialState = {
     signsVisibleList: [

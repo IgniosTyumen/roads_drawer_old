@@ -1,7 +1,7 @@
-import {SET_ROAD_INFO, SET_ROADS,} from '~/constants/RoadsConstants'
+import {ADD_FILTER, SET_ROAD_INFO, SET_ROADS} from '../constants/RoadsConstants'
 
 
-import {SAVE_DIRECTION} from '~/constants/WaypointsConstants'
+import {SAVE_DIRECTION} from '../constants/WaypointsConstants'
 import getLinestringFromArray from "../utils/getLinestringFromArray";
 
 const initialState = {
@@ -25,6 +25,15 @@ export default function road(state = initialState, action) {
             }
             newState.selectedRoad = newState.roads[replacedElement]
             return newState;
+        }
+        case ADD_FILTER: {
+            if (action.reducer === 'roads') {
+                return {
+                    ...state,
+                    [action.key] : action.value
+                }
+            }
+            return state;
         }
         case SAVE_DIRECTION: {
             let newState = {...state};

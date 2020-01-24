@@ -1,4 +1,11 @@
-import {SELECT_BRIDGE, SELECT_DANGER_ROAD, SELECT_ROAD, SELECT_SEGMENT} from "~/constants/SelectConstants";
+import {
+    SELECT_AMBULANCE,
+    SELECT_BRIDGE,
+    SELECT_CITY,
+    SELECT_DANGER_ROAD,
+    SELECT_ROAD,
+    SELECT_SEGMENT
+} from "../constants/SelectConstants";
 
 export const selectRoad = (object) => dispatch =>{
      dispatch( {
@@ -20,10 +27,22 @@ export const selectDangerRoad = (object) => dispatch =>{
         payload: object
     })
 }
+export const selectCity = (object) => dispatch =>{
+     dispatch( {
+        type: SELECT_CITY,
+        payload: object
+    })
+}
 
 export const selectSegment = (object) => dispatch =>{
     dispatch( {
         type: SELECT_SEGMENT,
+        payload: object
+    })
+}
+export const selectAmbulance = (object) => dispatch =>{
+    dispatch( {
+        type: SELECT_AMBULANCE,
         payload: object
     })
 }

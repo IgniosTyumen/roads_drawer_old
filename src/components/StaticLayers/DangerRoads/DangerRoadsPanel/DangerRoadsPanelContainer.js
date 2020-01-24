@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import DangerRoadsPanel from "./DangerRoadsPanel";
 import getPointsArrayFromLinestring from "../../../../utils/getPointsArrayFromLinestring";
 import {bindActionCreators} from "redux";
-import * as mapActions from "~/actions/MapActions";
-import * as selectObjectsActions from "~/actions/SelectObjectsActions";
+import * as mapActions from "../../../../actions/MapActions";
+import * as selectObjectsActions from "../../../../actions/SelectObjectsActions";
 import getPointsArrayFromPoint from "../../../../utils/getPointsArrayFromPoints";
 
 const DangerRoadsPanelContainer = ({dangerRoads, handleSelectDetailedObject,mapActions,selectObjectsActions}) => {

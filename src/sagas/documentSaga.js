@@ -1,5 +1,5 @@
-import {REMOVE_WAYPOINT, SAVE_DIRECTION} from '~/constants/WaypointsConstants'
-import {SET_ROAD_ACTIVE, SET_ROAD_ACTIVE_PREVIEW} from "~/constants/RoadActiveConstants";
+import {REMOVE_WAYPOINT, SAVE_DIRECTION} from '../constants/WaypointsConstants'
+import {SET_ROAD_ACTIVE, SET_ROAD_ACTIVE_PREVIEW} from "../constants/RoadActiveConstants";
 
 
 import {call, put, takeEvery} from 'redux-saga/effects'

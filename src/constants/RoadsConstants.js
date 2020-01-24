@@ -1,4 +1,9 @@
 export const SET_ROADS = 'SET_ROADS';
+export const UPDATE_CITIES = 'UPDATE_CITIES';
+export const UPDATE_CITY_FULL_INFO = 'UPDATE_CITY_FULL_INFO';
+export const UPDATE_FIELD_IN_CITY = 'UPDATE_FIELD_IN_CITY';
 export const SET_SIGNS = 'SET_SIGNS';
 export const SET_ROAD_INFO = 'SET_ROAD_INFO';
+export const ADD_CITY_FILTER = 'ADD_CITY_FILTER';
+export const ADD_FILTER = 'ADD_FILTER';
 

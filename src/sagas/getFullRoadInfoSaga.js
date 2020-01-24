@@ -1,10 +1,7 @@
-import {
-    SET_ROAD_INFO,
-    SET_SIGNS
-} from "~/constants/RoadsConstants";
+import {SET_ROAD_INFO, SET_SIGNS} from "../constants/RoadsConstants";
 
 
-import { call, put, takeEvery, takeLatest, all, take } from 'redux-saga/effects'
+import {all, call, put, takeEvery} from 'redux-saga/effects'
 
 import {roadsApi, signsApi} from "../api/api";
 

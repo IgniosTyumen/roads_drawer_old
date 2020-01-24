@@ -2,11 +2,11 @@ import React, {Fragment} from "react";
 import {CircleMarker, Polyline} from "react-leaflet";
 import invertColor from "../../../utils/invertColor";
 import getPointsArrayFromLinestring from "../../../utils/getPointsArrayFromLinestring";
-import RoadPopupContainer from "../../StaticLayers/Roads/RoadPopup/RoadPopupContainer";
 import styleProvider from "../../CommonComponents/StyleProvider/styleProvider";
+import getPointsArrayFromPoint from "../../../utils/getPointsArrayFromPoints";
 
 const SelectedObject = props => {
-    const {road, bridge,dangerRoad, userPreferences, segment} = props;
+    const {road, bridge,dangerRoad, city, airfield, userPreferences, segment} = props;
     let DrawableElement = null;
 
     if (road) {
@@ -18,7 +18,7 @@ const SelectedObject = props => {
                           key={road.id}
                           color={invertColor(styleProvider(userPreferences,'roads','roadColor'))}
                           weight={styleProvider(userPreferences,'roads','roadLineWidth')*2}>
-                    <RoadPopupContainer road={road}/>
+                    {/*<RoadPopupContainer road={road}/>*/}
                 </Polyline>
         }
     } else
@@ -62,7 +62,11 @@ const SelectedObject = props => {
                     </Polyline>
                 </Fragment>
         }
+    } else  if (city) {
+        const geometry = getPointsArrayFromPoint(city.point)[0]
+        DrawableElement =   <CircleMarker center={geometry} radius={20} />
     }
+
     if (DrawableElement){
         return (
             <Fragment>

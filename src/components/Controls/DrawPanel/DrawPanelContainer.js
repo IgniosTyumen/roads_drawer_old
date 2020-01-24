@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import DrawPanel from "./DrawPanel";
 import {roadsApi} from "../../../api/api";
-import * as waypointActions from '~/actions/WaypointActions'
-import * as appActions from '~/actions/AppActions'
+import * as waypointActions from '../../../actions/WaypointActions'
+import * as appActions from '../../../actions/AppActions'
 import getPointsArrayFromLinestring from "../../../utils/getPointsArrayFromLinestring";
 import {bindActionCreators} from "redux";
 import {cleanCoords, simplify} from "@turf/turf";

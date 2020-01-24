@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import RoadDetailObject from "./RoadDetailObject";
 import {bindActionCreators} from 'redux';
-import * as mapActions from "~/actions/MapActions";
-import * as selectObjectsActions from "~/actions/SelectObjectsActions";
+import * as mapActions from "../../../../actions/MapActions";
+import * as selectObjectsActions from "../../../../actions/SelectObjectsActions";
 import getPointsArrayFromLinestring from "../../../../utils/getPointsArrayFromLinestring";
 
 
@@ -23,6 +23,7 @@ const RoadDetailObjectContainer = props => {
     }
 
     const markAsActiveForGeometry = () => {
+        debugger
         dispatch({
             type: 'SELECT_ROAD_TO_WORK',
             payload: object

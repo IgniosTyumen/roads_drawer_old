@@ -1,6 +1,6 @@
-import {SET_ROAD_ACTIVE, SET_ROAD_ACTIVE_PREVIEW} from "~/constants/RoadActiveConstants";
+import {SET_ROAD_ACTIVE, SET_ROAD_ACTIVE_PREVIEW} from "../constants/RoadActiveConstants";
 
-import {FINISH_WORK_WITH_ROAD, REMOVE_WAYPOINT, SAVE_DIRECTION} from '~/constants/WaypointsConstants'
+import {FINISH_WORK_WITH_ROAD, REMOVE_WAYPOINT, SAVE_DIRECTION} from '../constants/WaypointsConstants'
 import getLinestringFromArray from "../utils/getLinestringFromArray";
 
 

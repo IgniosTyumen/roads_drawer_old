@@ -6,20 +6,20 @@ import styleProvider from "../../../CommonComponents/StyleProvider/styleProvider
 import {calculatePermission} from "../../../../utils/calculatePermission";
 
 
-const colorSwitcher = (road,userPreferences) => {
+const colorSwitcher = (road, userPreferences) => {
     let result = '#a1fdc1';
     if (road) {
-        switch (road.importance){
+        switch (road.importance) {
             case 'FEDERAL': {
-                result = styleProvider(userPreferences,'roads', 'colorRoadFederal');
+                result = styleProvider(userPreferences, 'roads', 'colorRoadFederal');
                 break;
             }
             case 'REGIONAL': {
-                result = styleProvider(userPreferences,'roads', 'colorRoadRegional');
+                result = styleProvider(userPreferences, 'roads', 'colorRoadRegional');
                 break;
             }
             case 'MUNICIPAL': {
-                result = styleProvider(userPreferences,'roads', 'colorRoadMunicipal');
+                result = styleProvider(userPreferences, 'roads', 'colorRoadMunicipal');
                 break;
             }
             default: {
@@ -30,20 +30,20 @@ const colorSwitcher = (road,userPreferences) => {
     return result;
 }
 
-const widthSwitcher = (road,userPreferences) => {
+const widthSwitcher = (road, userPreferences) => {
     let result = 2;
     if (road) {
-        switch (road.importance){
+        switch (road.importance) {
             case 'FEDERAL': {
-                result = styleProvider(userPreferences,'roads', 'widthRoadFederal');
+                result = styleProvider(userPreferences, 'roads', 'widthRoadFederal');
                 break;
             }
             case 'REGIONAL': {
-                result = styleProvider(userPreferences,'roads', 'widthRoadRegional');
+                result = styleProvider(userPreferences, 'roads', 'widthRoadRegional');
                 break;
             }
             case 'MUNICIPAL': {
-                result = styleProvider(userPreferences,'roads', 'widthRoadMunicipal');
+                result = styleProvider(userPreferences, 'roads', 'widthRoadMunicipal');
                 break;
             }
             default: {
@@ -58,17 +58,29 @@ const widthSwitcher = (road,userPreferences) => {
 const RoadsLayer = (props) => {
 
 
-    const {roads, userPreferences, selectedObjectActions, drawAlgorithm, roadTypeFilter, showRestrictedRoads,userAuth} = props;
+    const {roads, userPreferences, selectedObjectActions, drawAlgorithm, roadTypeFilter, showRestrictedRoads, userAuth,zoom} = props;
     let Elements;
-    if (roads.roads) {
-        const opacity = styleProvider(userPreferences,'opacity', 'roads','1');
-        Elements = roads.roads.map(road => {
+
+    let iteratedList = roads.roads
+    if (roads.filtered && iteratedList) {
+        debugger
+        let newList = [];
+        for (let it = 0; it < roads.filtered.length; it++) {
+            const cityToList = iteratedList.find(el => el.id === roads.filtered[it].id);
+            newList.push(cityToList)
+        }
+        iteratedList = newList;
+    }
+
+    if (iteratedList) {
+        const opacity = styleProvider(userPreferences, 'opacity', 'roads');
+        Elements = iteratedList.map(road => {
                 if (roadTypeFilter.length && (!road.importance && roadTypeFilter.includes('unknown')) || (road.importance && road.importance.toLowerCase && roadTypeFilter.includes(road.importance.toLowerCase()))) {
-                    if (!showRestrictedRoads && !(calculatePermission(road,userAuth))) {
-                        return  null
+                    if (!showRestrictedRoads && !(calculatePermission(road, userAuth))) {
+                        return null
                     }
                     const color = colorSwitcher(road, userPreferences);
-                    const width = widthSwitcher(road,userPreferences);
+                    const width = widthSwitcher(road, userPreferences);
                     if (road.segments_set && road.segments_set.length && road.segments_set[0].line_path) {
                         let SegmentGroup = [];
                         let start;
@@ -85,12 +97,18 @@ const RoadsLayer = (props) => {
                                     end = points[points.length - 1]
                                 }
                                 //TODO realize
-
-
-
+                                // let pointsToSimple = lineString(points);
+                                // let tolerance = 0;
+                                // if (zoom>=5 && zoom<8) tolerance = 0.0007;
+                                // if (zoom>=8&& zoom<10) tolerance = 0.0003;
+                                // if (zoom>=10&& zoom<13) tolerance = 0.0001;
+                                // if (zoom>=13) tolerance = 0;
+                                // const options = {tolerance: tolerance, highQuality: false}
+                                // pointsToSimple = simplify(pointsToSimple,options)
+                                // SegmentGroup.push(<Polyline positions={pointsToSimple.geometry.coordinates}
                                 SegmentGroup.push(<Polyline positions={points}
                                                             key={'road' + road.id + 'segment' + road.segments_set[it].id}
-                                                            color = {color}
+                                                            color={color}
                                                             weight={width}
                                                             onClick={() => selectedObjectActions.selectRoad(road)}
                                                             opacity={opacity}
@@ -107,13 +125,15 @@ const RoadsLayer = (props) => {
                                 <Fragment>
                                     {SegmentGroup}
                                     <CircleMarker center={start}
-                                                  radius={styleProvider(userPreferences,'roads', 'endpointsWidth',2)}
+                                                  radius={styleProvider(userPreferences, 'roads', 'endpointsWidth', 2)}
                                                   color={color}
                                                   opacity={opacity}
+                                                  key={'roadCM' + road.id}
                                                   onContextMenu={(event) => {
                                                   }}/>
                                     < CircleMarker center={end}
-                                                   radius={styleProvider(userPreferences,'roads', 'endpointsWidth',2)}
+                                                   key={'roadCMEnd' + road.id}
+                                                   radius={styleProvider(userPreferences, 'roads', 'endpointsWidth', 2)}
                                                    color={color}
                                                    opacity={opacity}
                                                    onContextMenu={(event) => {
@@ -146,16 +166,16 @@ const RoadsLayer = (props) => {
                                     >
                                         <RoadPopupContainer road={road}/>
                                     </Polyline>
-                                    {styleProvider(userPreferences,'roads', 'endpointsVisible',true) &&
+                                    {styleProvider(userPreferences, 'roads', 'endpointsVisible', true) &&
                                     <Fragment>
                                         <CircleMarker center={points[0]}
-                                                      radius={styleProvider(userPreferences,'roads', 'endpointsWidth',2)}
+                                                      radius={styleProvider(userPreferences, 'roads', 'endpointsWidth', 2)}
                                                       color={color}
                                                       opacity={opacity}
                                                       onContextMenu={(event) => {
                                                       }}/>
                                         < CircleMarker center={points[points.length - 1]}
-                                                       radius={styleProvider(userPreferences,'roads', 'endpointsWidth',2)}
+                                                       radius={styleProvider(userPreferences, 'roads', 'endpointsWidth', 2)}
                                                        color={color}
                                                        opacity={opacity}
                                                        onContextMenu={(event) => {
@@ -166,7 +186,7 @@ const RoadsLayer = (props) => {
                             )
                         }
                     }
-                }
+                } else return null
             }
         );
     }

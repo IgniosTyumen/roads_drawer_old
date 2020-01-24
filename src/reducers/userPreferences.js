@@ -49,7 +49,9 @@ export const initialState = {
         roads: 1,
         signs: 1,
         dangerRoads: 1,
-        draw: 1
+        draw: 1,
+        airfields:1,
+        cities:1
     }
 };
 

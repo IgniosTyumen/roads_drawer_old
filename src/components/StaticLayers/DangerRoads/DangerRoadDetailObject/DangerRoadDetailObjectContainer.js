@@ -2,8 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import DangerRoadDetailObject from "./DangerRoadDetailObject";
 import {bindActionCreators} from "redux";
-import * as mapActions from "~/actions/MapActions";
-import * as selectObjectsActions from "~/actions/SelectObjectsActions";
+import * as mapActions from "../../../../actions/MapActions";
+import * as selectObjectsActions from "../../../../actions/SelectObjectsActions";
 import getPointsArrayFromLinestring from "../../../../utils/getPointsArrayFromLinestring";
 
 const DangerRoadDetailObjectContainer = props => {

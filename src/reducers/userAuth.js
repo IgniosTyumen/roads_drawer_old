@@ -1,9 +1,4 @@
-import {
-    START_USER_AUTH_FETCHING,
-    USER_AUTH_FETCHING_SUCCESS,
-    USER_AUTH_FETCHING_FAILURE,
-    SET_USER_AUTH_PARAMS,
-} from '~/constants/UserAuthParams'
+import {SET_USER_AUTH_PARAMS,} from '../constants/UserAuthParams'
 
 const initialState = {}
 

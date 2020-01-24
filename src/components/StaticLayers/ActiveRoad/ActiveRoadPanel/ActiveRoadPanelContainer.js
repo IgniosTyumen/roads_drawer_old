@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import ActiveRoadPanel from "./ActiveRoadPanel";
-import * as waypointActions from '~/actions/WaypointActions'
-import * as mapActions from '~/actions/MapActions'
-import * as selectObjectsActions from "~/actions/SelectObjectsActions";
+import * as waypointActions from '../../../../actions/WaypointActions'
+import * as mapActions from '../../../../actions/MapActions'
+import * as selectObjectsActions from "../../../../actions/SelectObjectsActions";
 import {bindActionCreators} from "redux";
 
 const ActiveRoadPanelContainer = props => {

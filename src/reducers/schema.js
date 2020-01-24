@@ -1,4 +1,4 @@
-import {SAVE_SCHEMA} from '~/constants/SchemaConstants'
+import {SAVE_SCHEMA} from '../constants/SchemaConstants'
 
 const initialState = {
     schema:{}

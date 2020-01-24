@@ -1,4 +1,4 @@
-import {SAVE_USER_REFERENCES, SET_VISUAL_PREFERENCE} from '~/constants/UserSettingsConstants'
+import {SAVE_USER_REFERENCES, SET_VISUAL_PREFERENCE} from '../constants/UserSettingsConstants'
 
 export const changeVisualPreference = (branch,key,value) => (dispatch) => {
     dispatch({

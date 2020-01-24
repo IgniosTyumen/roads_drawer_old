@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Popup} from "react-leaflet";
 import {Button, Icon, Spin} from 'antd';
 
@@ -53,7 +53,7 @@ const RoadPopup = ({road, dispatch,markAsActiveForGeometry}) => {
             </div>
     }
 
-    useEffect(handleLoadComplete,[road.roadFullInfo]);
+    // useEffect(handleLoadComplete,[road.roadFullInfo]);
     return (
         <Popup>
             <div>

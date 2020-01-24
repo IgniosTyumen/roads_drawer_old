@@ -1,11 +1,11 @@
 import React, {Fragment} from "react";
 import {connect} from "react-redux";
 import RoadsLayer from "./RoadsLayer";
-import * as selectedObjectActions from "~/actions/SelectObjectsActions";
+import * as selectedObjectActions from "../../../../actions/SelectObjectsActions";
 import {bindActionCreators} from "redux";
 
 
-const RoadsLayerContainer = ({roads, visibleList,userPreferences, selectedObjectActions, drawAlgorithm,roadTypeFilter,showRestrictedRoads,userAuth}) => {
+const RoadsLayerContainer = ({roads, visibleList,userPreferences, selectedObjectActions, drawAlgorithm,roadTypeFilter,showRestrictedRoads,userAuth,zoom}) => {
     return (
         <Fragment>
             {visibleList.indexOf("roads") < 0 && <RoadsLayer
@@ -16,6 +16,7 @@ const RoadsLayerContainer = ({roads, visibleList,userPreferences, selectedObject
                 roadTypeFilter={roadTypeFilter}
                 showRestrictedRoads={showRestrictedRoads}
                 userAuth={userAuth}
+                zoom={zoom}
             />}
         </Fragment>
     )
@@ -30,6 +31,7 @@ const mapStateToProps = (state) => {
         roadTypeFilter: state.map.visibleRoads,
         showRestrictedRoads: state.map.showRestrictedRoads,
         userAuth: state.userAuth,
+        zoom: state.map.zoom
     }
 };
 

@@ -461,6 +461,17 @@
     border-radius: 25px;
 }
 
+.calculatorPanel{
+    position: absolute;
+    top: 70px;
+    width: fit-content;
+    height: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1500;
+    border-radius: 25px;
+}
+
 .editMode{
     background-color: #8cc8ff;
 }
@@ -572,4 +583,49 @@
 
 .panelSummaryDecoratorActions{
     display: flex;
+}
+
+.legendContainer{
+    position: absolute;
+    z-index: 2500;
+    right: 10px;
+    bottom: 60px;
+    width: auto;
+    background-color: whitesmoke;
+    padding: 5px;
+    border-radius: 10px;
+    transition-duration: 2s;
+    -webkit-transition-duration: 2s;
+}
+.markerClusterLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.legendOnButton{
+
+}
+.legendOffButtonContainer{
+
+}
+
+.groupButtonContainer {
+    position: relative;
+}
+.visibilityButton{
+    width: fit-content;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+}
+
+.settingsButton {
+    width: fit-content;
+    position: absolute;
+    right: 7px;
+    top: 38px;
+}
+
+.ant-modal {
+    transform: translateX(20px);
 }

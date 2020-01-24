@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import * as preferencesActions from '~/actions/ChangePreferencesActions'
+import * as preferencesActions from '../../../actions/ChangePreferencesActions'
 import DrawVisionSettings from "./DrawVisionSettings";
 
 const DrawVisionSettingsContainer = ({userPreferencesActions, userPreferences})  => {

@@ -20,6 +20,10 @@ const SelectTyleLayer = ({handleSelectTyleLayer,zoom}) => {
                 <Option value='https://tile.tgt72.ru/{z}/{x}/{y}.png'>ТГТ 19</Option>
                 <Option value='https://b.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'>ОСМ hydra 18</Option>
                 <Option value='https://b.tile.opentopomap.org/{z}/{x}/{y}.png'>OTM 17</Option>
+                <Option value='https://b.tile.opentopomap.org/{z}/{x}/{y}.png'>OTM 17</Option>
+                <Option value='http://tiles.maps.sputnik.ru/{z}/{x}/{y}.png'>Спутник</Option>
+                <Option value='https://core-sat.maps.yandex.net/tiles?l=sat&v=3.546.0&x={x}&y={y}&z={z}&scale=1&lang=ru_RU'>Яндекс Спутник</Option>
+                <Option value='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'>OCM Sputnik</Option>
             </Select>
 
         </div>

@@ -5,7 +5,7 @@ import RoadPopup from "./RoadPopup";
 const RoadPopupContainer = ({road,  dispatch}) => {
 
     const markAsActiveForGeometry = () => {
-
+        debugger
         dispatch({
             type: 'SELECT_ROAD_TO_WORK',
             payload: road

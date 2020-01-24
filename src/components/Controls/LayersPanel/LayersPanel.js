@@ -30,7 +30,9 @@ const LayersPanel = (props) => {
         signs:false,
         dangers: false,
         // routes:false,
-        draw:false
+        draw:false,
+        cities:false,
+        airfields:false,
     });
 
     const [opacityLayer,setOpacityLayer] = useState({
@@ -38,6 +40,8 @@ const LayersPanel = (props) => {
         signs: styleProvider(userPreferences,'opacity','signs'),
         dangers: styleProvider(userPreferences,'opacity','dangerRoads'),
         draw: styleProvider(userPreferences,'opacity','draw'),
+        cities: styleProvider(userPreferences,'opacity','cities'),
+        airfields: styleProvider(userPreferences,'opacity','airfields'),
     })
 
     const handleOpacityChange = (value,type) => {
@@ -63,6 +67,14 @@ const LayersPanel = (props) => {
             }
             case 'draw' : {
                 userPreferencesActions.changeVisualPreference('opacity','draw',value);
+                break;
+            }
+            case 'cities' : {
+                userPreferencesActions.changeVisualPreference('opacity','cities',value);
+                break;
+            }
+            case 'airfields' : {
+                userPreferencesActions.changeVisualPreference('opacity','airfields',value);
                 break;
             }
         }

@@ -1,4 +1,4 @@
-import {CLOSE_CREATE_NEW_ROAD_DIALOG, OPEN_CREATE_NEW_ROAD_DIALOG} from '~/constants/NewRoadConstants'
+import {CLOSE_CREATE_NEW_ROAD_DIALOG, OPEN_CREATE_NEW_ROAD_DIALOG} from '../constants/NewRoadConstants'
 
 export const openCreateDialog = () => dispatch =>{
     dispatch({

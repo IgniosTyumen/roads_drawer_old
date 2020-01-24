@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import * as preferencesActions from '~/actions/ChangePreferencesActions'
+import * as preferencesActions from '../../../../actions/ChangePreferencesActions'
 import {bindActionCreators} from "redux";
 import SignsVisionFilterF from "./SignsVisionFilterF";
 

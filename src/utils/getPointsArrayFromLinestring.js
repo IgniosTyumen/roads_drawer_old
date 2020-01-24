@@ -1,4 +1,4 @@
-const getPointsArrayFromLinestring = (str) => {
+const getPointsArrayFromLinestring = (str, swap=false) => {
     let result = [];
     let pointsStr = '';
     if (str) {
@@ -7,7 +7,8 @@ const getPointsArrayFromLinestring = (str) => {
     }
     for (let it=0; it<pointsStr.length; it++){
         const workOnArray = pointsStr[it].trim().split(' ');
-        result.push([Number.parseFloat(workOnArray[1]), Number.parseFloat(workOnArray[0])])
+        if (!swap) result.push([Number.parseFloat(workOnArray[1]), Number.parseFloat(workOnArray[0])])
+        if (swap)  result.push([Number.parseFloat(workOnArray[0]), Number.parseFloat(workOnArray[1])])
     }
     return result;
 };

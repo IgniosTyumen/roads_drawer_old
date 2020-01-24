@@ -11,7 +11,7 @@ import {
     REMOVE_CHECKPOINT_MARKER,
     SET_WAYPOINT_TEMPLATE,
     SWAP_CHECKPOINTS_DIRECTION
-} from '~/constants/WaypointsConstants'
+} from '../constants/WaypointsConstants'
 
 import {SWITCH_RESTRICTED_ROADS_SHOW, SWITCH_SHOW_EDIT_MARKERS} from '../constants/AppGlobalConstants'
 

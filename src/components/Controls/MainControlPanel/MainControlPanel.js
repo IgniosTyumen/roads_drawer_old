@@ -11,6 +11,10 @@ import {bridgesApi, dangersApi, roadsApi} from "../../../api/api";
 import DangerRoadsPanelContainer from "../../StaticLayers/DangerRoads/DangerRoadsPanel/DangerRoadsPanelContainer";
 import OrderControlPanelContainer from "../../StaticLayers/Order/OrderControlPanel/OrderControlPanelContainer";
 import DrawAlgorithmPanelContainer from "../Draw/DrawAlgorithmPanel/DrawAlgorithmPanelContainer";
+import AirfieldsPanelContainer from "../../StaticLayers/Airfields/AirfieldsPanel/AirfieldsPanelContainer";
+import CitiesPanelContainer from "../../StaticLayers/Cities/CitiesPanel/CitiesPanelContainer";
+import AmbulancePanelContainer from "../../StaticLayers/Ambulance/AmbulancePanel/AmbulancePanelContainer";
+import FAPPanelContainer from "../../StaticLayers/FAP/FAPPanel/FAPPanelContainer";
 
 const MainControlPanel = ({activeRoad}) => {
     const [openedPanel, setOpenedPanel] = useState('initClosedPanel');
@@ -111,7 +115,11 @@ const MainControlPanel = ({activeRoad}) => {
                     {mainGroupWindow==='roads' && <RoadControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                     {mainGroupWindow==='dangers' && <DangerRoadsPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                     {mainGroupWindow==='order' && <OrderControlPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='airfields' && <AirfieldsPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='cities' && <CitiesPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                     {mainGroupWindow==='drawAlgorithm' && <DrawAlgorithmPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='ambulance' && <AmbulancePanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
+                    {mainGroupWindow==='fap' && <FAPPanelContainer handleSelectDetailedObject={handleSelectDetailedObject}/>}
                 </div>
             }
 

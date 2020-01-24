@@ -1,6 +1,4 @@
-import {
-    SET_SIGNS
-} from '~/constants/RoadsConstants'
+import {SET_SIGNS} from '../constants/RoadsConstants'
 
 const initialState = {
     roadsigns: [],

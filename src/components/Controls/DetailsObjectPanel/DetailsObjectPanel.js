@@ -3,6 +3,7 @@ import RoadDetailObjectContainer from "../../StaticLayers/Roads/RoadDetailObject
 import DangerRoadDetailObjectContainer
     from "../../StaticLayers/DangerRoads/DangerRoadDetailObject/DangerRoadDetailObjectContainer";
 import Preloader from "../../CommonComponents/Preloader/Preloader";
+import CitiesDetailObjectContainer from "../../StaticLayers/Cities/CitiesDetailObject/CitiesDetailObjectContainer";
 
 const DetailsObjectPanel = (props) => {
 
@@ -13,6 +14,7 @@ const DetailsObjectPanel = (props) => {
             {fetching && !detailedObjectType && <Preloader/>}
             {!fetching && detailedObjectType==='road' && <RoadDetailObjectContainer object={detailedObject} handleSelectDetailedObject={handleSelectDetailedObject}/>}
             {!fetching && detailedObjectType==='dangerRoad' && <DangerRoadDetailObjectContainer object={detailedObject} handleSelectDetailedObject={handleSelectDetailedObject}/>}
+            {!fetching && detailedObjectType==='city' && <CitiesDetailObjectContainer object={detailedObject} handleSelectDetailedObject={handleSelectDetailedObject}/>}
         </div>
     )
 };

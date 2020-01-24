@@ -163,6 +163,7 @@ const ActiveRoadPanel = (props) => {
 
     let lengthOfRoad = 0;
     if (activeRoad.segments_set && activeRoad.segments_set.length) {
+        debugger
         for (let it=0;it< activeRoad.segments_set.length; it++){
             lengthOfRoad+=calculateLengthOfPolyline(getPointsArrayFromLinestring(activeRoad.segments_set[it].line_path))
         }

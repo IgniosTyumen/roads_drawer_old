@@ -5,7 +5,7 @@ import {
     SET_CENTER_AND_ZOOM,
     SET_VIEWPORT_COORDINATES,
     SET_ZOOM
-} from "~/constants/Map";
+} from "../constants/Map";
 
 import {
     DISABLE_ADD_MARKER_MODE,
@@ -58,7 +58,8 @@ export default function map(state = initialState, action) {
       return {
         ...state,
         center: action.center,
-        zoom: action.zoom
+        zoom: action.zoom,
+        bounds: action.bounds
       }
       case SET_ZOOM:
       return {

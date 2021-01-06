@@ -58,7 +58,7 @@
     "@turf/turf": "^5.1.6",
     "antd": "^3.26.5",
     "apexcharts": "^3.10.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "cookies": "^0.8.0",
     "cookies-js": "^1.2.3",
